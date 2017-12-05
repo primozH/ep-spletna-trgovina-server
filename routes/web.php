@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', "ProductController@index");
+
+Route::get('/{product_category}', 'ProductController@list_products_by_category');
+
+Route::get('/{product_category}/{product_id}', 'ProductController@show_details_for_product');
+
+
