@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUporabnikVlogasTable extends Migration
+class CreateOcenaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,20 @@ class CreateUporabnikVlogasTable extends Migration
      */
     public function up()
     {
-        Schema::create('uporabnik_vloga', function (Blueprint $table) {
+        Schema::create('ocenas', function (Blueprint $table) {
+            $table->integer("ocena", false, true)->nullable(false);
             $table->integer("id_uporabnik", false, true);
-            $table->integer("id_vloga", false, true);
+            $table->integer("id_produkt", false, true);
             $table->timestamps();
 
-            $table->primary(["id_uporabnik", "id_vloga"]);
+            $table->primary(["id_uporabnik", "id_produkt"]);
 
             $table->foreign("id_uporabnik")
                     ->references("id_uporabnik")
                     ->on("uporabnik");
-            $table->foreign("id_vloga")
-                    ->references("id_vloga")
-                    ->on("vloga");
+            $table->foreign("id_produkt")
+                    ->references("id_produkt")
+                    ->on("produkt");
         });
     }
 
@@ -36,6 +37,6 @@ class CreateUporabnikVlogasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uporabnik_vlogas');
+        Schema::dropIfExists('ocena');
     }
 }

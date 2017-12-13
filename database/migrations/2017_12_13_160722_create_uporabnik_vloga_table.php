@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDnevniksTable extends Migration
+class CreateUporabnikVlogaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,19 @@ class CreateDnevniksTable extends Migration
      */
     public function up()
     {
-        Schema::create('dnevnik', function (Blueprint $table) {
-            $table->timestamp("datum_cas")->default(\DB::raw("CURRENT TIMESTAMP"));
-            $table->string("opis", 255)->nullable(false);
-            $table->string("tip", 45)->nullable(false);
-            $table->integer("id_uporabnik", false, true)->nullable(false);
+        Schema::create('uporabnik_vloga', function (Blueprint $table) {
+            $table->integer("id_uporabnik", false, true);
+            $table->integer("id_vloga", false, true);
+            $table->timestamps();
 
-            $table->primary(["id_uporabnik", "datum_cas"]);
+            $table->primary(["id_uporabnik", "id_vloga"]);
 
             $table->foreign("id_uporabnik")
                     ->references("id_uporabnik")
                     ->on("uporabnik");
+            $table->foreign("id_vloga")
+                    ->references("id_vloga")
+                    ->on("vloga");
         });
     }
 
@@ -34,6 +36,6 @@ class CreateDnevniksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dnevniks');
+        Schema::dropIfExists('uporabnik_vloga');
     }
 }

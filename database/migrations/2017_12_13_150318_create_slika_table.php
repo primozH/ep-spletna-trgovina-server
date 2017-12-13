@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCenikTable extends Migration
+class CreateSlikaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateCenikTable extends Migration
      */
     public function up()
     {
-        Schema::create('cenik', function (Blueprint $table) {
-            $table->increments('zap_st');
-            $table->decimal("cena", 7, 2)->default(0.0);
-            $table->integer("id_produkt")->nullable(false);
-            $table->date("veljavno_do")->nullable(false);
+        Schema::create('slika', function (Blueprint $table) {
+            $table->increments('id_slike');
+            $table->string("pot")->nullable(false);
+            $table->integer("id_produkt", false, true)->nullable(false);
+            $table->string("alias")->nullable(false);
             $table->timestamps();
-
-            $table->primary("zap_st");
 
             $table->foreign("id_produkt")
                     ->references("id_produkt")
@@ -35,6 +33,6 @@ class CreateCenikTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ceniks');
+        Schema::dropIfExists('slika');
     }
 }

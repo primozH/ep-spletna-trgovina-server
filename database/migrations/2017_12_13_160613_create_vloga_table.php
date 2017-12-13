@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreateVlogaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('produkt', function (Blueprint $table) {
-            $table->increments('id_produkt');
-            $table->string("naziv", 255)->nullable(false);
-            $table->string("opis", 2000)->nullable(false);
-            $table->softDeletes();
+        Schema::create('vloga', function (Blueprint $table) {
+            $table->increments('id_vloga');
+            $table->string("naziv", 45);
             $table->timestamps();
-
-            $table->primary("id_produkt");
 
         });
     }
@@ -32,6 +28,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('izdelek');
+        Schema::dropIfExists('vloga');
     }
 }

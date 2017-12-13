@@ -23,7 +23,6 @@ class CreateUporabnikTable extends Migration
             $table->string("hash_gesla", 200);
             $table->timestamps();
 
-            $table->primary("id_uporabnik");
         });
     }
 
@@ -34,6 +33,6 @@ class CreateUporabnikTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uporabniks');
+        Schema::dropIfExists('uporabnik');
     }
 }

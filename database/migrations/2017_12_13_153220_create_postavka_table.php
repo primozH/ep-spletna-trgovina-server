@@ -14,9 +14,9 @@ class CreatePostavkaTable extends Migration
     public function up()
     {
         Schema::create('postavka', function (Blueprint $table) {
-            $table->integer("kolicina")->unsigned()->default(1);
-            $table->integer("id_produkt")->unsigned()->nullable(false);
-            $table->integer("id_racun")->unsigned()->nullable(false);
+            $table->integer("kolicina", false, true)->default(1);
+            $table->integer("id_produkt", false, true)->nullable(false);
+            $table->integer("id_racun", false, true)->nullable(false);
             $table->decimal("cena", 7, 2)->default(0.0);
             $table->timestamps();
 
@@ -28,7 +28,7 @@ class CreatePostavkaTable extends Migration
                     ->on("produkt");
             $table->foreign("id_racun")
                     ->references("id_racun")
-                    ->on("produkt");
+                    ->on("racun");
         });
     }
 
@@ -39,6 +39,6 @@ class CreatePostavkaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postavkas');
+        Schema::dropIfExists('postavka');
     }
 }

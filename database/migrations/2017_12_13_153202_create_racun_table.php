@@ -23,7 +23,6 @@ class CreateRacunTable extends Migration
             $table->decimal("znesek", 8, 2);
             $table->timestamps();
 
-            $table->primary("id_racun");
 
             $table->foreign("id_prodajalec")
                     ->references("id_uporabnik")
@@ -44,6 +43,6 @@ class CreateRacunTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('racuns');
+        Schema::dropIfExists('racun');
     }
 }
