@@ -18,6 +18,7 @@ class CreateCenikTable extends Migration
             $table->decimal("cena", 7, 2)->default(0.0);
             $table->integer("id_produkt", false, true)->nullable(false);
             $table->date("veljavno_do")->nullable(false);
+            $table->string("valuta", 5)->default("EURO");
             $table->timestamps();
 
 

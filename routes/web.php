@@ -24,9 +24,9 @@ Route::match(['get', 'post'], '/register', 'UserController@register');
 Route::get('/profile', 'UserController@register');
 
 /* PRODUCTS */
-Route::get('/{product_category}', 'ProductController@list_products_by_category');
+Route::prefix("views")->group(function() {
 
-Route::get('/{product_category}/{product_id}', 'ProductController@show_details_for_product');
+});
 
 
 /* ADMIN */

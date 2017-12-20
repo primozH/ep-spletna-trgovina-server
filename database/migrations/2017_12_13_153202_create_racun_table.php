@@ -15,12 +15,13 @@ class CreateRacunTable extends Migration
     {
         Schema::create('racun', function (Blueprint $table) {
             $table->increments("id_racun");
-            $table->date("datum");
-            $table->integer("storniran_racun", false, true)->default(null);
+            $table->date("datum")->nullable(true);
+            $table->integer("storniran_racun", false, true)->nullable(true);
             $table->enum("status", ["potrjen", "preklican", "odprt", "zakljucen"])->default("odprt");
-            $table->integer("id_prodajalec", false, true);
+            $table->integer("id_prodajalec", false, true)->nullable(true);
             $table->integer("id_stranka", false, true)->nullable(false);
-            $table->decimal("znesek", 8, 2);
+            $table->decimal("znesek", 8, 2)->default(0);
+            $table->softDeletes();
             $table->timestamps();
 
 
