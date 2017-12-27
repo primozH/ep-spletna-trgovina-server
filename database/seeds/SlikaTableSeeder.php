@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Api\Slika;
+use App\Slika;
 
 class SlikaTableSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class SlikaTableSeeder extends Seeder
 
         $images = [
             [
-                "pot" => "/images/G751-Left-Open135-Top.jpg",
+                "pot" => "/storage/images/G751-Left-Open135-Top.jpg",
                 "id_produkt" => 1,
                 "alias" => "Asus ROG"
             ]

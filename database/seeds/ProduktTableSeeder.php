@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Api\Produkt;
+use App\Produkt;
 
 class ProduktTableSeeder extends Seeder
 {

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Api\Uporabnik;
+use App\Uporabnik;
 
 class UporabnikTableSeeder extends Seeder
 {

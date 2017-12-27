@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Api\Postavka;
+use App\Postavka;
 
 class PostavkaTableSeeder extends Seeder
 {

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Api\Racun;
+use App\Racun;
 
 class RacunTableSeeder extends Seeder
 {

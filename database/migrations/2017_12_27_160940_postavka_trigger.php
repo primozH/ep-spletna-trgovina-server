@@ -37,6 +37,6 @@ class PostavkaTrigger extends Migration
      */
     public function down()
     {
-        DB::uprepared("DROP TRIGGER insert_price");
+        DB::unprepared("DROP TRIGGER insert_price");
     }
 }

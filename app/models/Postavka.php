@@ -10,5 +10,5 @@ class Postavka extends Model
 
     protected $primaryKey = ["id_produkt", "id_racun"];
 
-    protected $incrementing = false;
+    public $incrementing = false;
 }

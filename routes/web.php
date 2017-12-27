@@ -27,17 +27,11 @@ Route::get('/profile', 'UserController@register');
 //Route::get('/{product_category}', 'ProductController@list_products_by_category');
 
 //Route::get('/{product_category}/{product_id}', 'ProductController@show_details_for_product');
-Route::get('/izdelki', function() {
-    return view('index');
-});
+Route::get('/', "ProductController@index");
 
-Route::get('/prijava', function() {
-    return view('prijava_stranka');
-});
+Route::get('/prijava', "LoginController@login");
 
-Route::get('/registracija', function() {
-    return view('registracija_stranka');
-});
+Route::get('/registracija', "LoginController@register");
 
 Route::get('/izdelki-stranka', function() {
     return view('index_stranka');
