@@ -33,6 +33,14 @@ class UporabnikTableSeeder extends Seeder
                 "naslov" => "Maribor 12",
                 "tel_stevilka" => "051555555"
             ],
+            [
+                "ime" => "Matija",
+                "priimek" => "Mako",
+                "email" => "matija@matija.si",
+                "hash_gesla" => "12345",
+                "naslov" => "Koroška Bela 12",
+                "tel_stevilka" => "069000000"
+            ]
         ];
 
         foreach($accounts as $item) {

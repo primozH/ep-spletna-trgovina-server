@@ -25,14 +25,23 @@ Route::get('/profile', 'UserController@register');
 
 /* PRODUCTS */
 Route::prefix("views")->group(function() {
-
+    Route::get("/products/{id_product}", "ProductController@showDetailsForProduct");
 });
 
 
 /* ADMIN */
 Route::middleware('auth:admin')->group(function () {
 
-    Route::get('/salesmen', 'SalesmenController@list');
+    Route::get('/salesmen', 'SalesmanController@list');
+    Route::get("/salesmen/{idSalesman}", "SalesmanController@editDetails");
+});
+
+Route::prefix("sales")->group(function() {
+    Route::get("/products", "ProductController@retrieveProducts");
+    Route::get("/products/{id_product}", "ProductController@retrieveProduct");
+    Route::post('/products', "ProductController@createProduct");
+    Route::put("/products/{id_product}", "ProductController@updateProduct");
+    Route::delete('/products/{id_product}', "ProductController@deleteProduct");
 });
 
 

@@ -13,14 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/products', 'ProductController@retrieveProducts');
-Route::get('/products/{id_product}', "ProductController@retrieveProduct");
-Route::post('/products', "ProductController@createProduct");
-Route::put("/products/{id_product}", "ProductController@updateProduct");
-Route::delete('/products/{id_product}', "ProductController@deleteProduct");
+Route::get('/products', 'ProductControllerApi@retrieveProducts');
+Route::get('/products/{id_product}', "ProductControllerApi@retrieveProduct");
+
+
+Route::get("/products/{productId}/grade", "GradeController@retrieveProductGrade");
+Route::post("/products/{productId}/grade", "GradeController@addGrade");
 
 Route::get("/invoices", "InvoiceController@retrieveInvoices");
 Route::get("/invoices/{id_invoice}", "InvoiceController@retrieveInvoice");
 Route::post("/invoices", "InvoiceController@createInvoice");
 Route::put("/invoices/{id_invoice}", "InvoiceController@updateInvoice");
 Route::delete("/invoices/{id_invoice}", "InvoiceController@deleteInvoice");
+
+Route::post("/invoices/{invoiceId}/items", "InvoiceItemController@addItemsToInvoice");

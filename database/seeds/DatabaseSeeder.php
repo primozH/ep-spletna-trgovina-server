@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             CenikTableSeeder::class,
             RacunTableSeeder::class,
             PostavkaTableSeeder::class,
+            SlikaTableSeeder::class,
         ]);
     }
 }

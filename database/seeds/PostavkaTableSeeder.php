@@ -20,22 +20,5 @@ class PostavkaTableSeeder extends Seeder
         $postavka->id_racun = 1;
 
         $postavka->save();
-
-        $product = $postavka->product();
-        $cena = $product->currentPrice()->cena;
-        $postavka->cena = $cena * $kolicina;
-
-        $postavka->save();
-
-        $invoice = $postavka->invoice();
-        $items = $invoice->invoiceItems();
-
-        $cost = 0;
-        foreach($items as $item) {
-            $cost += $item->cena;
-        }
-
-        $invoice->znesek = $cost;
-        $invoice->save();
     }
 }

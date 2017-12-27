@@ -12,9 +12,22 @@ class RacunTableSeeder extends Seeder
      */
     public function run()
     {
-        $invoice = new Racun;
-        $invoice->id_stranka = 1;
+        $invoices = [
+            [
+                "id_stranka"=>1
+            ],
+            [
+                "id_stranka" => 2
+            ]
+        ];
 
-        $invoice->save();
+        foreach ($invoices as $item)
+        {
+
+            $invoice = new Racun;
+            $invoice->id_stranka = $item["id_stranka"];
+
+            $invoice->save();
+        }
     }
 }

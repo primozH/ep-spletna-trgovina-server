@@ -13,32 +13,29 @@ class ProductController extends Controller
 {
 
     public function index() {
-        return view('index');
-    }
-
-    public function retrieveProducts() {
         $products = Produkt::all();
-        return ProduktResource::collection($products);
+        return view('index', $products);
     }
 
-    public function retrieveProduct($id) {
-        $product = Produkt::find($id);
-        return new ProduktResource($product);
-    }
-
-    public function show_details_for_product($product_category, $product_id) {
-        $product_name = "Prenosni računalnik ASUS ROG";
-        return view('product_details', ["product_name" => $product_name]);
+    public function showDetailsForProduct($productId) {
+        $product = Produkt::find($productId);
+        $data = [
+            "product_name" => $product->naziv,
+            "product_description" => $product->opis,
+            "product_price" => $product->currentPrice()->cena,
+            "images" => $product->images()
+        ];
+        return view('product_details', $data);
     }
 
     public function createProduct(Request $req) {
         $product = new Produkt;
-        $product->naziv = $req->input("produkt.naziv");
-        $product->opis = $req->input("produkt.opis");
+        $product->naziv = $req->input("naziv");
+        $product->opis = $req->input("opis");
 
         $product->save();
 
-        $this->insertNewPriceForProduct($product, $req->json("produkt.cena"), $req->json("produkt.valuta"));
+        $this->insertNewPriceForProduct($product, $req->input("cena"), $req->input("valuta"));
         return new ProduktResource($product);
     }
 

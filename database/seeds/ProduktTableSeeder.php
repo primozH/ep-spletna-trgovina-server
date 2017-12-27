@@ -11,16 +11,36 @@ class ProduktTableSeeder extends Seeder
      * @return void
      */
 
-    protected $products = [
-    ];
+
 
     public function run()
     {
-        $produkt = new Produkt;
-        $produkt->naziv = "Prenosni računalnik Asus ROG";
-        $produkt->opis = "Prenosni računalnik Asus ROG je namenjen najzahtevnejšim igralcem računalniških iger."
-                        ."Z grafično kartico Nvidia GTX1080 ne bo nobena ovira previsoka.";
+        $products = [
+            [
+                "naziv"=>"Prenosni računalnik Asus ROG",
+                "opis"=>"Prenosni računalnik Asus ROG je namenjen najzahtevnejšim igralcem računalniških iger."
+                    ."Z grafično kartico Nvidia GTX1080 ne bo nobena ovira previsoka."
+            ],
+            [
+                "naziv"=>"Prenosni računalnik Lenovo Thinkpad",
+                "opis"=>"Prenosni računalnik Toshiba ponuja izjemno kakovost in vsestransko uporabnost"
+            ],
+            [
+                "naziv"=>"Namizni računalnik Toshiba",
+                "opis"=>"Ugodno razmerje med ceno in uporabnostjo. Kos bo vsem pisarniškim opravilom."
+            ],
+            [
+                "naziv"=>"Grafična kartica Gigabyte RX580",
+                "opis"=>"Zmogljiva grafična kartica"
+            ]
+        ];
+        foreach ($products as $product) {
 
-        $produkt->save();
+            $produkt = new Produkt;
+            $produkt->naziv = $product["naziv"];
+            $produkt->opis = $product["opis"];
+            $produkt->save();
+        }
+
     }
 }

@@ -48,4 +48,23 @@ class InvoiceController extends Controller
 
         return new InvoiceResource($invoice);
     }
+
+    public function updateInvoice(Request $request, $id)
+    {
+        $invoice = Racun::findOrFail($id);
+
+        $input = $request->all();
+        $invoice->id_prodajalec = $input["salesId"];
+        $invoice->storniran_racun = $input["cancelledBy"];
+        $invoice->datum = $input["date"];
+
+        return new InvoiceResource($invoice);
+    }
+
+    public function deleteInvoice(Request $request, $id)
+    {
+        Racun::destroy($id);
+
+        return response("", 204);
+    }
 }

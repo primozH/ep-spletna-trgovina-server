@@ -13,7 +13,7 @@ class CreateOcenaTable extends Migration
      */
     public function up()
     {
-        Schema::create('ocenas', function (Blueprint $table) {
+        Schema::create('ocena', function (Blueprint $table) {
             $table->integer("ocena", false, true)->nullable(false);
             $table->integer("id_uporabnik", false, true);
             $table->integer("id_produkt", false, true);
