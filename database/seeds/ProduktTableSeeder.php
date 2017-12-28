@@ -32,6 +32,10 @@ class ProduktTableSeeder extends Seeder
             [
                 "naziv"=>"Grafična kartica Gigabyte RX580",
                 "opis"=>"Zmogljiva grafična kartica"
+            ],
+            [
+                "naziv" => "Grafična kartica Nvidia GTX1080 Titan",
+                "opis" => "Izogibanje grafično zahtevnim igram ni več pod vprašajem! Vrhunska zmogljivost, kos vsaki nalogi!"
             ]
         ];
         foreach ($products as $product) {

@@ -32,7 +32,12 @@ class CenikTableSeeder extends Seeder
                 "cena" => 500,
                 "id_produkt" => 4,
                 "veljavno_do" => date_create("12-01-2018")
-            ]
+            ],
+            [
+                "cena" => 800,
+                "id_produkt" => 5,
+                "veljavno_do" => date_create("12-01-2018")
+            ],
         ];
 
         foreach ($cenik as $item)

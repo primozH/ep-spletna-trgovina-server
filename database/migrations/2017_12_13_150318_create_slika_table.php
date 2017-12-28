@@ -18,6 +18,7 @@ class CreateSlikaTable extends Migration
             $table->string("pot")->nullable(false);
             $table->integer("id_produkt", false, true)->nullable(false);
             $table->string("alias")->nullable(false);
+            $table->integer("zap_st", false, true);
             $table->timestamps();
 
             $table->foreign("id_produkt")

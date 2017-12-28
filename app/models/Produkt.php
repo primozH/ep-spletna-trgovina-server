@@ -31,6 +31,7 @@ class Produkt extends Model
 
     public function images()
     {
-        return $this->hasMany("App\Slika", "id_produkt", "id_produkt");
+        return $this->hasMany("App\Slika", "id_produkt", "id_produkt")
+            ->orderBy("zap_st");
     }
 }
