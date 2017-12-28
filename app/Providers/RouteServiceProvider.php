@@ -37,6 +37,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
         $this->mapWebRoutes();
+        $this->mapAdminRoutes();
+        $this->mapSalesmanRoutes();
         //
     }
 
@@ -58,6 +60,20 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapWebRoutes()
     {
-        Route::namespace($this->namespace)->group(base_path("routes/web.php"));
+        Route::namespace($this->namespace . "\Web\Stranka")->group(base_path("routes/web.php"));
+    }
+
+    protected function mapAdminRoutes()
+    {
+        Route::prefix("admin")
+            ->namespace($this->namespace . "\Web\Admin")
+            ->group(base_path("routes/admin.php"));
+    }
+
+    protected function mapSalesmanRoutes()
+    {
+        Route::prefix("sales")
+            ->namespace($this->namespace . "\Web\Sales")
+            ->group(base_path("routes/sales.php"));
     }
 }

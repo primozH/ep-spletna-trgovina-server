@@ -1,10 +1,10 @@
 @extends('layout.layout')
 
 @section("content")
-    <h1>{{ $product_name }}</h1>
-    <p>{{ $product_description }}</p>
-    <p>{{ $product_price }}</p>
-    @foreach ($images as $image)
-        <img src={{ $image->pot }}>
+    <h1>{{ $product->naziv }}</h1>
+    <p>{{ $product->opis }}</p>
+    <p>{{ $product->currentPrice()->cena }} {{ $product->currentPrice()->valuta }}</p>
+    @foreach ($product->images as $image)
+        <img src="{{ $image->pot }}" alt="{{ $image->alias }}" class="img-fluid" />
     @endforeach
 @endsection

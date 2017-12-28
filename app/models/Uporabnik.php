@@ -10,6 +10,8 @@ class Uporabnik extends Model
 
     protected $primaryKey = "id_uporabnik";
 
+    protected $guarded = [];
+
     public function logs()
     {
         return $this->hasMany("Api\Dnevnik", "id_uporabnik", "id_uporabnik");

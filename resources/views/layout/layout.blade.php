@@ -49,45 +49,47 @@
                 <img src="http://www.imgnaly.com/wp-content/uploads/2015/05/Shopping-Begins.png" alt="Let the shopping begin" height="300">
             </div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Spletna trgovina EP</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Domov <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
+                <a class="navbar-brand" href="/">Spletna trgovina EP</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Domov <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
 
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Možnosti
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/prijava-administrator">Prijava kot administrator</a>
-                            <a class="dropdown-item" href="/prijava-prodajalec">Prijava kot prodajalec</a>
-                            <a class="dropdown-item" href="/zgodovina-nakupov">Zgodovina nakupov</a>
-                            <a class="dropdown-item" href="/kosarica">Košarica</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/odjava">Odjava</a>
-                        </div>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <a class="btn btn-outline-success my-2 my-sm-0" type="submit" style="position: absolute; right: 50;" href="/prijava">Prijava</a>
-                    <a class="btn btn-outline-success my-2 my-sm-0" type="submit" style="position: absolute; right: 150;" href="/registracija">Registracija</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Možnosti
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/prijava-administrator">Prijava kot administrator</a>
+                                <a class="dropdown-item" href="/prijava-prodajalec">Prijava kot prodajalec</a>
+                                <a class="dropdown-item" href="/zgodovina-nakupov">Zgodovina nakupov</a>
+                                <a class="dropdown-item" href="/kosarica">Košarica</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/odjava">Odjava</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <a class="btn btn-outline-success my-2 my-sm-0" type="submit" style="position: absolute; right: 50;" href="/prijava">Prijava</a>
+                        <a class="btn btn-outline-success my-2 my-sm-0" type="submit" style="position: absolute; right: 150;" href="/registracija">Registracija</a>
 
-                </form>
-            </div>
-          </nav>
+                    </form>
+                </div>
+            </nav>
         </header>
 
-        <div class="container">
+        <div class="container-fluid">
             @yield("content")
         </div>
     </body>
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    @yield("script")
 </html>

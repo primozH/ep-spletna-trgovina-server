@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web\Stranka;
 
-use Api\Http\Resources\Invoice;
-use Api\Racun;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Invoice;
+use App\Racun;
 use App\Postavka;
 use Illuminate\Http\Request;
 

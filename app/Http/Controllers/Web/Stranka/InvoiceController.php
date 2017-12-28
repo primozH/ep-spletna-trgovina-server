@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Api\Postavka;
-use Api\Racun;
-use Api\Http\Resources\Invoice as InvoiceResource;
+use App\Postavka;
+use App\Racun;
+use App\Http\Resources\Invoice as InvoiceResource;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller

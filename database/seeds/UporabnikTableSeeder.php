@@ -21,7 +21,8 @@ class UporabnikTableSeeder extends Seeder
                 "ime" => "Janez",
                 "priimek" => "Novak",
                 "email" => "janez@novak.si",
-                "hash_gesla" => "1234",
+                "uporabnisko_ime" => "janezek",
+                "geslo" => "1234",
                 "naslov" => "Borovnica 12",
                 "tel_stevilka" => "041999999"
             ],
@@ -29,7 +30,8 @@ class UporabnikTableSeeder extends Seeder
                 "ime" => "Krištof",
                 "priimek" => "Mirni",
                 "email" => "kristof@majka.si",
-                "hash_gesla" => "54621",
+                "uporabnisko_ime" => "kristof",
+                "geslo" => "54621",
                 "naslov" => "Maribor 12",
                 "tel_stevilka" => "051555555"
             ],
@@ -37,7 +39,8 @@ class UporabnikTableSeeder extends Seeder
                 "ime" => "Matija",
                 "priimek" => "Mako",
                 "email" => "matija@matija.si",
-                "hash_gesla" => "12345",
+                "uporabnisko_ime" => "mato",
+                "geslo" => "12345",
                 "naslov" => "Koroška Bela 12",
                 "tel_stevilka" => "069000000"
             ]
@@ -49,7 +52,8 @@ class UporabnikTableSeeder extends Seeder
             $account->ime = $item["ime"];
             $account->priimek = $item["priimek"];
             $account->email = $item["email"];
-            $account->hash_gesla = $item["hash_gesla"];
+            $account->geslo = bcrypt($item["geslo"]);
+            $account->uporabnisko_ime = $item["uporabnisko_ime"];
             $account->naslov = $item["naslov"];
             $account->tel_stevilka = $item["tel_stevilka"];
 

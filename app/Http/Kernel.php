@@ -28,7 +28,8 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         "web" => [
-            \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class
+            \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class
         ],
         'api' => [
             'throttle:60,1',

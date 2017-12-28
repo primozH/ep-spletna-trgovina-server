@@ -17,10 +17,11 @@ class CreateUporabnikTable extends Migration
             $table->increments('id_uporabnik');
             $table->string("ime", 45)->nullable(false);
             $table->string("priimek", 100)->nullable(false);
+            $table->string("uporabnisko_ime", 100)->nullable(false)->unique();
             $table->string("email", 255)->nullable(false);
             $table->string("naslov", 255);
-            $table->string("tel_stevilka", 15);
-            $table->string("hash_gesla", 200);
+            $table->string("tel_stevilka", 15)->nullable(true);
+            $table->string("geslo", 255);
             $table->timestamps();
 
         });

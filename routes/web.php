@@ -12,110 +12,23 @@
 */
 
 Route::get('/', "ProductController@index");
+Route::get("/izdelki/{izdelekId}", "ProductController@productDetails");
 
+/* PRIJAVA */
+Route::get('/prijava', "LoginController@login")->name("login");
+Route::post("prijava", "LoginController@verifyLogin");
 
-/* USER PATHS */
-Route::match(['get', 'post'], '/login', 'UserController@login');
+/* REGISTRACIJA */
+Route::get('/registracija', "LoginController@register")->name("register");
+Route::post("registracija", "LoginController@verifyRegister");
 
-Route::get('/logout', 'UserController@logout');
+/* STRANKA */
+Route::get("/stranka/{strankaId}/profil", "UserController@updateUser");
+Route::get('/stranka/{strankaId}/zgodovina', "InvoiceController@listInvoices");
+Route::get('stranka/{strankaId}/racun/{racunId}', "InvoiceController@invoiceDetail");
 
-Route::match(['get', 'post'], '/register', 'UserController@register');
+Route::get("/kosarica", "CartController@showCart");
 
-Route::get('/profile', 'UserController@register');
-
-/* PRODUCTS */
-//Route::get('/{product_category}', 'ProductController@list_products_by_category');
-
-//Route::get('/{product_category}/{product_id}', 'ProductController@show_details_for_product');
-Route::get('/', "ProductController@index");
-
-Route::get('/prijava', "LoginController@login");
-
-Route::get('/registracija', "LoginController@register");
-
-Route::get('/izdelki-stranka', function() {
-    return view('index_stranka');
-});
-
-Route::get('/posodobi', function() {
-    return view('posodobi_stranka');
-});
-
-Route::get('/zgodovina', function() {
-    return view('zgodovina_nakupov_stranka');
-});
-
-Route::get('/prijava-administrator', function() {
-    return view('prijava_administrator');
-});
-
-Route::get('/izdelki-administrator', function() {
-    return view('index_administrator');
-});
-
-Route::get('/posodobi-administrator', function() {
-   return view('posodobi_administrator');
-});
-
-Route::get('/upravljanje-administrator', function() {
-    return view('upravljanje_administrator');
-});
-
-Route::get('/ustvari-administrator', function() {
-    return view('ustvari_prodajalca_administrator');
-});
-
-Route::get('/prodajalci-administrator', function() {
-    return view('prodajalci_administrator');
-});
-
-Route::get('/prijava-prodajalec', function() {
-    return view('prijava_prodajalec');
-});
-
-Route::get('/izdelki-prodajalec', function() {
-    return view('index_prodajalec');
-});
-
-Route::get('/posodobi-prodajalec', function() {
-    return view('posodobi_prodajalec');
-});
-
-Route::get('/obdelava-prodajalec', function() {
-    return view('obdelava_prodajalec');
-});
-
-Route::get('/neobdelana-prodajalec', function() {
-    return view('neobdelana_narocila_prodajalec');
-});
-
-Route::get('/potrjena-prodajalec', function() {
-    return view('potrjena_narocila_prodajalec');
-});
-
-Route::get('/dodaj-prodajalec', function() {
-    return view('dodaj_artikel_prodajalec');
-});
-
-Route::get('/artikli-prodajalec', function() {
-   return view('artikli_prodajalec');
-});
-
-Route::get('/posodobi-artikel-prodajalec', function() {
-    return view('posodobi_artikel_prodajalec');
-});
-
-Route::get('/ustvari-prodajalec', function() {
-   return view('ustvari_stranko_prodajalec');
-});
-
-Route::get('/stranke-prodajalec', function() {
-    return view('pregled_strank_prodajalec');
-});
-
-Route::get('/posodobi-stranko-prodajalec', function() {
-    return view('posodobi_stranko_prodajalec');
-});
 /* ADMIN */
 Route::middleware('auth:admin')->group(function () {
 
@@ -130,5 +43,3 @@ Route::prefix("sales")->group(function() {
     Route::put("/products/{id_product}", "ProductController@updateProduct");
     Route::delete('/products/{id_product}', "ProductController@deleteProduct");
 });
-
-

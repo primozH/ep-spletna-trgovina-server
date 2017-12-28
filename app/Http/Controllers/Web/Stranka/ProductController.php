@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web\Stranka;
 
 use App\Cenik;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Produkt;
 use App\Http\Resources\Produkt as ProduktResource;
@@ -17,15 +18,10 @@ class ProductController extends Controller
         return view('stranka.index', ["products"=>$products]);
     }
 
-    public function showDetailsForProduct($productId) {
-        $product = Produkt::find($productId);
-        $data = [
-            "product_name" => $product->naziv,
-            "product_description" => $product->opis,
-            "product_price" => $product->currentPrice()->cena,
-            "images" => $product->images()
-        ];
-        return view('product_details', $data);
+    public function productDetails($izdelekId) {
+        $product = Produkt::find($izdelekId);
+
+        return view('stranka.product_details', ["product" => $product]);
     }
 
     public function createProduct(Request $req) {

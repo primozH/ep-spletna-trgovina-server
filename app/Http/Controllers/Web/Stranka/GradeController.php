@@ -6,7 +6,7 @@
  * Time: 11:26
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web\Stranka;
 
 
 use Api\Produkt;
