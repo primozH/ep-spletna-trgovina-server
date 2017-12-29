@@ -8,8 +8,19 @@
         @endif
         <div class="col-12 col-md-6 col-lg-3" id="{{ $product->id_produkt }}">
             <h4 class="clickable">{{ $product->naziv }}</h4>
-            <p>{{ $product->opis }}</p>
             <p>{{ $product->currentPrice()->cena }} {{ $product->currentPrice()->valuta }}</p>
+
+            <span>
+                @for ($i = 1; $i <= 5; $i++)
+                    @if ($product->povprecna_ocena >= $i)
+                        <i class="fas fa-star fa-2x"></i>
+                    @else
+                        <i class="far fa-star fa-2x"></i>
+                    @endif
+                @endfor
+                <p>{{ $product->povprecna_ocena }}</p>
+            </span>
+
             @foreach($product->images as $image)
 
                 <img src="{{ $image->pot }}" alt="{{ $image->alias }}" class="img-fluid clickable"/>

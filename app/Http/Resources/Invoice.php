@@ -16,13 +16,13 @@ class Invoice extends Resource
     {
         return [
             "id" => $this->id_racun,
-            "date" => $this->datum,
-            "cancelled_by" => $this->storniran,
+            "datum" => $this->datum,
+            "storniran" => $this->storniran,
             "status" => $this->status,
-            "id_salesman" => $this->id_prodajalec,
-            "id_customer" => $this->id_stranka,
+            "id_prodajalec" => $this->id_prodajalec,
+            "id_stranka" => $this->id_stranka,
             "znesek" => $this->znesek,
-            "items" => $this->invoiceItems()->get()
+            "postavke" => $this->invoiceItems
         ];
     }
 }

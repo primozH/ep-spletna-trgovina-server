@@ -6,15 +6,16 @@
  * Time: 11:26
  */
 
-namespace App\Http\Controllers\Web\Stranka;
+namespace App\Http\Controllers\Api;
 
 
-use Api\Produkt;
-use Api\Ocena;
-use Api\Http\Resources\Produkt as ProduktResource;
+use App\Produkt;
+use App\Ocena;
+use App\Http\Resources\Produkt as ProduktResource;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class GradeController
+class GradeController extends Controller
 {
     public function gradeProduct(Request $request, $productId)
     {
@@ -22,12 +23,13 @@ class GradeController
 
         $grade = new Ocena;
 
-        $grade->ocena = $request->input("grade");
+        $grade->ocena = $request->input("ocena");
         $grade->id_produkt = $productId;
-        $grade->id_uporabnik = $request->input("accountId");
+        $grade->id_uporabnik = $request->input("id_uporabnik");
 
-        $grade->save();
+        $product->grades()->save($grade);
 
         return new ProduktResource($product);
     }
+
 }

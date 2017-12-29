@@ -11,4 +11,11 @@ class Postavka extends Model
     protected $primaryKey = ["id_produkt", "id_racun"];
 
     public $incrementing = false;
+
+
+
+    public function invoice()
+    {
+        return $this->belongsTo("App\Racun", "id_racun", "id_racun");
+    }
 }

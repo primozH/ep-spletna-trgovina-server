@@ -34,4 +34,9 @@ class Produkt extends Model
         return $this->hasMany("App\Slika", "id_produkt", "id_produkt")
             ->orderBy("zap_st");
     }
+
+    public function grades()
+    {
+        return $this->hasMany("App\Ocena", "id_produkt", "id_produkt");
+    }
 }

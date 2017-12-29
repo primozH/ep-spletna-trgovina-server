@@ -7,26 +7,26 @@
  */
 
 
-Route::get('prijava', function() {
+Route::get('/prijava', function() {
     return view('admin.prijava_administrator');
 });
 
-Route::get('/izdelki-administrator', function() {
-    return view('index_administrator');
+Route::get('/profil', function() {
+    return view('admin.index_administrator');
 });
 
-Route::get('/posodobi-administrator', function() {
-    return view('posodobi_administrator');
+Route::get('/posodobi', function() {
+    return view('admin.posodobi_administrator');
 });
 
-Route::get('/upravljanje-administrator', function() {
-    return view('upravljanje_administrator');
+Route::get('/upravljanje', function() {
+    return view('admin.upravljanje_administrator');
 });
 
-Route::get('/ustvari-administrator', function() {
-    return view('ustvari_prodajalca_administrator');
+Route::get('/ustvari', function() {
+    return view('admin.ustvari_prodajalca_administrator');
 });
 
-Route::get('/prodajalci-administrator', function() {
-    return view('prodajalci_administrator');
+Route::get('/', function() {
+    return view('admin.prodajalci_administrator');
 });

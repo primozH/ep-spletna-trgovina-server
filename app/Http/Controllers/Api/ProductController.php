@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Api\Cenik;
+use App\Cenik;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Api\Produkt;
-use Api\Http\Resources\Produkt as ProduktResource;
+use App\Produkt;
+use App\Http\Resources\Produkt as ProduktResource;
 
 const DEFAULT_TIME = "2099-01-01";
 
-class ProductControllerApi extends Controller
+class ProductController extends Controller
 {
 
     public function retrieveProducts() {

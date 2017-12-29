@@ -10,7 +10,7 @@ class Ocena extends Model
 
     protected $primaryKey = ["id_uporabnik", "id_produkt"];
 
-    protected $incrementing = false;
+    public $incrementing = false;
 
     public function product()
     {

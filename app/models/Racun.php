@@ -17,21 +17,21 @@ class Racun extends Model
 
     public function customer()
     {
-        return $this->belongsTo("Api\Uporabnik", "id_stranka", "id_uporabnik");
+        return $this->belongsTo("App\Uporabnik", "id_stranka", "id_uporabnik");
     }
 
     public function salesman()
     {
-        return $this->belongsTo("Api\Uporabnik", "id_prodajalec", "id_uporabnik");
+        return $this->belongsTo("App\Uporabnik", "id_prodajalec", "id_uporabnik");
     }
 
     public function invoiceItems()
     {
-        return $this->hasMany("Api\Postavka", "id_racun", "id_racun");
+        return $this->hasMany("App\Postavka", "id_racun", "id_racun");
     }
 
     public function canceledBy()
     {
-        return $this->belongsTo("Api\Racun", "stornirano", "id_racun");
+        return $this->belongsTo("App\Racun", "stornirano", "id_racun");
     }
 }

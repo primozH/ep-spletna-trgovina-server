@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Postavka;
 use App\Racun;
 use App\Http\Resources\Invoice as InvoiceResource;
@@ -9,18 +10,19 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    public function retrieveInvoices()
+    public function retrieveInvoices(Request $request, $userid)
     {
-        $invoices = Racun::paginate(20);
+        $invoices = Racun::where("id_stranka", $userid)->paginate(20);
         return InvoiceResource::collection($invoices);
     }
 
-    public function retrieveInvoice(Request $request, $id)
+    public function retrieveInvoice(Request $request, $userid, $invoiceId)
     {
-        $invoice = Racun::find($id);
+        $invoice = Racun::where("id_stranka", $userid)->findOrFail($invoiceId);
 
         return new InvoiceResource($invoice);
     }
+
 
     public function createInvoice(Request $request)
     {
