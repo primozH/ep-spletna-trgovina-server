@@ -17,29 +17,21 @@ Route::get("/izdelki/{izdelekId}", "ProductController@productDetails");
 /* PRIJAVA */
 Route::get('/prijava', "LoginController@login")->name("login");
 Route::post("prijava", "LoginController@verifyLogin");
+Route::get("/odjava", "LoginController@logout");
 
 /* REGISTRACIJA */
 Route::get('/registracija', "LoginController@register")->name("register");
 Route::post("registracija", "LoginController@verifyRegister");
 
 /* STRANKA */
-Route::get("/stranka/{strankaId}/profil", "UserController@updateUser");
-Route::get('/stranka/{strankaId}/zgodovina', "InvoiceController@listInvoices");
-Route::get('stranka/{strankaId}/racun/{racunId}', "InvoiceController@invoiceDetail");
+Route::middleware("logged")->group(function() {
 
-Route::get("/kosarica", "CartController@showCart");
+    Route::get("/stranka/{strankaId}/profil", "UserController@updateUser");
+    Route::get('/stranka/{strankaId}/zgodovina', "InvoiceController@listInvoices");
+    Route::get('stranka/{strankaId}/racun/{racunId}', "InvoiceController@invoiceDetail");
 
-/* ADMIN */
-Route::middleware('auth:admin')->group(function () {
-
-    Route::get('/salesmen', 'SalesmanController@list');
-    Route::get("/salesmen/{idSalesman}", "SalesmanController@editDetails");
+    Route::get("/kosarica", "CartController@showCart");
+    Route::post("/kosarica", "CartController@addToCart");
 });
 
-Route::prefix("sales")->group(function() {
-    Route::get("/products", "ProductController@retrieveProducts");
-    Route::get("/products/{id_product}", "ProductController@retrieveProduct");
-    Route::post('/products', "ProductController@createProduct");
-    Route::put("/products/{id_product}", "ProductController@updateProduct");
-    Route::delete('/products/{id_product}', "ProductController@deleteProduct");
-});
+

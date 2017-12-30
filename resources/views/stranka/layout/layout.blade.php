@@ -43,9 +43,6 @@
     </head>
 
     <body>
-        <div class="container-fluid">
-            <img src="http://www.imgnaly.com/wp-content/uploads/2015/05/Shopping-Begins.png" alt="Let the shopping begin" height="300">
-        </div>
         <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light">
             <a class="navbar-brand" href="/">Spletna trgovina EP</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,11 +64,22 @@
                         </div>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/prijava">Prijava</a>
-                    <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/registracija">Registracija</a>
+                @if(!session()->has("userid"))
+                    <form class="form-inline my-2 my-lg-0">
+                        <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/prijava">Prijava</a>
+                        <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/registracija">Registracija</a>
 
-                </form>
+                    </form>
+                @else
+                    <a class="btn btn-outline-success" href="/odjava">Odjava</a>
+                    <a class="btn btn-outline-danger" id="shoppingCartBtn" href="/kosarica">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Košarica</span>
+                        <div>
+                            <span id="price">0</span><span> €</span>
+                        </div>
+                    </a>
+                @endif
             </div>
         </nav>
 

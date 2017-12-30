@@ -20,6 +20,12 @@ class LoginController extends Controller
         return view("stranka.prijava_stranka");
     }
 
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect("/");
+    }
+
     public function register()
     {
         return view("stranka.registracija_stranka");
@@ -30,12 +36,15 @@ class LoginController extends Controller
         $uporabnisko_ime = $request->input("uporabnisko_ime");
         $geslo = $request->input("geslo");
 
-        $uporabnik = Uporabnik::where("uporabnisko_ime", $uporabnisko_ime)->first();
+        $uporabnik = Uporabnik::where("uporabnisko_ime", $uporabnisko_ime)->get()->first();
+
         if ($uporabnik) {
-            if ($uporabnik->geslo == bcrypt($geslo))
-                return response()->redirectTo("/");
+            if (password_verify($geslo, $uporabnik->geslo)) {
+                $request->session()->put("userid", $uporabnik->id_uporabnik);
+                return redirect("/");
+            }
             else
-                return view("stranka.prijava_stranka", ["error" => "Napačno uporabniško ime ali geslo"]);
+                return view("stranka.prijava_stranka");
         }
 
         return view("stranka.prijava_stranka");
@@ -68,7 +77,7 @@ class LoginController extends Controller
             "email" => $data["email"],
             "tel_stevilka" => $data["tel_stevilka"],
             "naslov" => $data["naslov"],
-            'geslo' => bcrypt($data['geslo']),
+            'geslo' => password_hash($data['geslo'], PASSWORD_BCRYPT),
         ]);
     }
 

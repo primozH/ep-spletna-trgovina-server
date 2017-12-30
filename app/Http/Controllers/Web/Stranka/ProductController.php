@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function productDetails($izdelekId) {
         $product = Produkt::find($izdelekId);
 
-        return view('stranka.product_details', ["product" => $product]);
+        return view('stranka.produkt_podrobno_stranka', ["product" => $product]);
     }
 
     public function createProduct(Request $req) {

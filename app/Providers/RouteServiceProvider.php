@@ -60,7 +60,9 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapWebRoutes()
     {
-        Route::namespace($this->namespace . "\Web\Stranka")->group(base_path("routes/web.php"));
+        Route::namespace($this->namespace . "\Web\Stranka")
+            ->middleware("web")
+            ->group(base_path("routes/web.php"));
     }
 
     protected function mapAdminRoutes()

@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('stranka.layout.layout')
 
 
 @section("content1")

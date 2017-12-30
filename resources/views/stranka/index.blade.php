@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('stranka.layout.layout')
 
 @section("content")
     <h2>Artikli</h2>
@@ -26,7 +26,8 @@
                 <img src="{{ $image->pot }}" alt="{{ $image->alias }}" class="img-fluid clickable"/>
                 @break
             @endforeach
-            <button class="btn btn-danger">V košarico</button>
+
+            <button class="btn btn-danger add-to-cart">V košarico</button>
         </div>
         @if ($loop->index % 4 == 3 or $loop->last)
             </div>

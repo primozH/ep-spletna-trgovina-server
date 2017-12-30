@@ -52,7 +52,7 @@ class UporabnikTableSeeder extends Seeder
             $account->ime = $item["ime"];
             $account->priimek = $item["priimek"];
             $account->email = $item["email"];
-            $account->geslo = bcrypt($item["geslo"]);
+            $account->geslo = password_hash($item["geslo"], PASSWORD_BCRYPT);
             $account->uporabnisko_ime = $item["uporabnisko_ime"];
             $account->naslov = $item["naslov"];
             $account->tel_stevilka = $item["tel_stevilka"];

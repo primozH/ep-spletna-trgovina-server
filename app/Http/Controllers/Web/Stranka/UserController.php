@@ -7,14 +7,8 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function login()
-    {
-        return view("login");
-    }
-
-    public function register()
-    {
-        return view("register");
+    public function updateUser(Request $request) {
+        return view("stranka.posodobi_stranka");
     }
 
 

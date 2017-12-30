@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('stranka.layout.layout')
 
 @section("content")
     <h1>{{ $product->naziv }}</h1>
