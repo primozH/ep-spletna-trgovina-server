@@ -22,6 +22,7 @@ class CreateUporabnikTable extends Migration
             $table->string("naslov", 255);
             $table->string("tel_stevilka", 15)->nullable(true);
             $table->string("geslo", 255);
+            $table->boolean("potrjen")->default(false);
             $table->timestamps();
 
         });

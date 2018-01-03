@@ -24,4 +24,6 @@ Route::post("/invoices", "InvoiceController@createInvoice");
 Route::put("/invoices/{id_invoice}", "InvoiceController@updateInvoice");
 Route::delete("/invoices/{id_invoice}", "InvoiceController@deleteInvoice");
 
-Route::post("/invoices/{invoiceId}/items", "InvoiceItemController@addItemsToInvoice");
+Route::post("/login", "LoginController@login");
+Route::post("/register", "LoginController@register");
+Route::get("/register/verify", "LoginController@verifyRegister");

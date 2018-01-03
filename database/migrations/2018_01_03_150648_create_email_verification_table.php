@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCartTable extends Migration
+class CreateEmailVerificationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,15 @@ class CreateCartTable extends Migration
      */
     public function up()
     {
-        Schema::create('kosarica', function (Blueprint $table) {
-            $table->integer('id_uporabnik', false, true);
-            $table->integer("id_produkt", false, true);
-            $table->integer("kolicina", false, true);
+        Schema::create('email_potrditev', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer("id_uporabnik", false, true);
+            $table->string("zeton");
             $table->timestamps();
-
-            $table->primary(["id_uporabnik", "id_produkt"]);
 
             $table->foreign("id_uporabnik")
                 ->references("id_uporabnik")
                 ->on("uporabnik");
-
-            $table->foreign("id_produkt")
-                ->references("id_produkt")
-                ->on("produkt");
         });
     }
 
@@ -38,6 +32,6 @@ class CreateCartTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kosarica');
+        Schema::dropIfExists('email_potrditev');
     }
 }
