@@ -14,27 +14,32 @@ class Uporabnik extends Model
 
     public function logs()
     {
-        return $this->hasMany("Api\Dnevnik", "id_uporabnik", "id_uporabnik");
+        return $this->hasMany("App\Dnevnik", "id_uporabnik", "id_uporabnik");
     }
 
     public function roles()
     {
-        return $this->hasMany("Api\UporabnikVloga", "id_uporabnik", "id_uporabnik");
+        return $this->hasMany("App\UporabnikVloga", "id_uporabnik", "id_uporabnik");
     }
 
     public function ordersForCustomer()
     {
-        return $this->hasMany("Api\Racun", "id_stranka", "id_uporabnik");
+        return $this->hasMany("App\Racun", "id_stranka", "id_uporabnik");
     }
 
     public function ordersForSalesman()
     {
-        return $this->hasMany("Api\Racun", "id_prodajalec", "id_uporabnik");
+        return $this->hasMany("App\Racun", "id_prodajalec", "id_uporabnik");
     }
 
     public function ratings()
     {
-        return $this->hasMany("Api\Ocena", "id_uporabnik", "id_uporabnik");
+        return $this->hasMany("App\Ocena", "id_uporabnik", "id_uporabnik");
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany("App\Kosarica", "id_uporabnik", "id_uporabnik");
     }
 
 }
