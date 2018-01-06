@@ -74,8 +74,8 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapSalesmanRoutes()
     {
-        Route::prefix("sales")
-            ->namespace($this->namespace . "\Web\Sales")
+        Route::prefix("prodaja")
+            ->namespace($this->namespace . "\Web\Prodajalec")
             ->group(base_path("routes/sales.php"));
     }
 }

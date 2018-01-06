@@ -12,6 +12,6 @@ class Vloga extends Model
 
     public function userRoles()
     {
-        $this->hasMany("Api\UporabnikVloga", "id_vloga", "id_vloga");
+        $this->hasMany("App\UporabnikVloga", "id_vloga", "id_vloga");
     }
 }

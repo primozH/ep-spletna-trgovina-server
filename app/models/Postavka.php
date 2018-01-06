@@ -18,4 +18,9 @@ class Postavka extends Model
     {
         return $this->belongsTo("App\Racun", "id_racun", "id_racun");
     }
+
+    public function product()
+    {
+        return $this->belongsTo("App\Produkt", "id_produkt", "id_produkt");
+    }
 }

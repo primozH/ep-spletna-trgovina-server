@@ -1,42 +1,37 @@
-@extends('stranka.layout.layout')
+@extends('prodajalec.layout.layout')
 
 
 @section("content")
-    <table>
-        <tr>
-            <th>Artikli</th>
-            <th>Status</th>
-        </tr>
-        <tr>
-            <td>Artikel 1</td>
-            <td>
-                <select>
-                    <option value="aktiviran">Aktiviran</option>
-                    <option value="deaktiviran">Deaktiviran</option>
-                </select>
-            </td>
-            <td>
-                <a href="/posodobi-artikel-prodajalec" style="color: green;">Posodobi</a>
-            </td>
-        </tr>
-        <tr>
-            <td>Artikel 2</td>
-            <td>
-                <select>
-                    <option value="aktiviran">Aktiviran</option>
-                    <option value="deaktiviran">Deaktiviran</option>
-                </select>
-            </td>
-            <td>
-                <a href="/posodobi-artikel-prodajalec" style="color: green;">Posodobi</a>
-            </td>
-        </tr>
-    </table>
+    <div class="container-fluid">
+        <h1>Produkti</h1>
+        <div class="row">
+            <div class="col-2">
+                Številka produkta
+            </div>
+            <div class="col-2">
+                Naziv
+            </div>
+            <div class="col-2">
+                Cena €
+            </div>
+        </div>
+        @foreach ($izdelki as $izdelek)
+            <div class="row">
+                <div class="col-2">
+                    <a href="/prodaja/izdelki/{{ $izdelek->id_produkt }}">
+                        {{ $izdelek->id_produkt }}
+                    </a>
+                </div>
+                <div class="col-2">
+                    {{ $izdelek->naziv }}
+                </div>
+                <div class="col-2">
+                    {{ $izdelek->currentPrice()->cena }}
+                </div>
+            </div>
+        @endforeach
 
-    <br>
-    <div class="form-inline my-2 my-lg-0">
-        <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/obdelava-prodajalec">Shrani</a>
+        <a href="/prodaja/izdelki/dodaj" class="btn btn-danger">Dodaj nov izdelek</a>
     </div>
-    <a href="/obdelava-prodajalec"><p style="font-size: 20px;position: fixed;bottom: 5;right: 15;color: green; ">Nazaj</p></a>
 
 @endsection

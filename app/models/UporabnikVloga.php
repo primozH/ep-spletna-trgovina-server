@@ -10,15 +10,15 @@ class UporabnikVloga extends Model
 
     protected $primaryKey = ["id_uporabnik", "id_vloga"];
 
-    protected $incrementing = false;
+    public $incrementing = false;
 
     public function role()
     {
-        return $this->belongsTo("Api\Vloga", "id_vloga", "id_vloga");
+        return $this->belongsTo("App\Vloga", "id_vloga", "id_vloga");
     }
 
     public function account()
     {
-        return $this->belongsTo("Api\Uporabnik", "id_uporabnik", "id_uporabnik");
+        return $this->belongsTo("App\Uporabnik", "id_uporabnik", "id_uporabnik");
     }
 }

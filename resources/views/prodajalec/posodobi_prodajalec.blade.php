@@ -1,28 +1,27 @@
-@extends('stranka.layout.layout')
+@extends('prodajalec.layout.layout')
 
 @section("content")
 
-    <form action="/" method="post">
-        Ime:<br>
-        <input type="text" name="ime_prodajalec"><br>
-        Priimek:<br>
-        <input type="text" name="geslo_prodajalec"><br>
-        E-mail:<br>
-        <input type="text" name="el_naslov_prodajalec"><br>
-        Staro geslo:<br>
-        <input type="password" name="staro_geslo_prodajalec"><br>
-        Geslo:<br>
-        <input type="password" name="novo_geslo_prodajalec"><br>
-        Ponovno vpiši geslo:<br>
-        <input type="password" name="novo_geslo_prodajalec"><br><br>
+    <div class="container-fluid">
+        <div class="col-6">
+            <form action="/prodaja/profil" method="post">
+                Ime:<br>
+                <input type="text" name="ime"><br>
+                Priimek:<br>
+                <input type="text" name="priimek"><br>
+                E-mail:<br>
+                <input type="text" name="email"><br>
+                Geslo:<br>
+                <input type="password" name="geslo"><br>
+                Ponovi geslo:<br>
+                <input type="password" name="geslo_rep"><br>
 
-        <div class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/izdelki-prodajalec">Posodobi</a>
+                <div class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Posodobi</button>
+                </div>
+            </form>
         </div>
-    </form>
-
-
-    <a href="/izdelki-prodajalec"><p style="font-size: 20px;position: fixed;bottom: 5;right: 15;color: green; ">Nazaj</p></a>
+    </div>
 
 
 @endsection

@@ -1,29 +1,85 @@
-@extends('stranka.layout.layout')
+@extends('prodajalec.layout.layout')
 
-
-@section("content1")
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Domov <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Pozdravljen, Prodajalec!
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/posodobi-prodajalec">Posodobi podatke</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/obdelava-prodajalec">Obdelava naročil</a>
-                </div>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-success my-2 my-sm-0" type="submit" style="position: absolute; right: 50;" href="/">Odjava</a>
-        </form>
-    </div>
-@endsection
 @section("content")
-    <h2>Artikli</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <h3>Odprta naročila</h3>
+
+                <div class="row">
+                    <div class="col-4">
+                        <span>Račun</span>
+                    </div>
+                    <div class="col-4">
+                        <span>Id. stranke</span>
+                    </div>
+                    <div class="col-4">
+                        <span>Znesek</span>
+                    </div>
+                </div>
+                @foreach($odprtiRacuni as $racun)
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="/prodaja/racuni/{{ $racun->id_racun }}">
+                                <span>{{ $racun->id_racun }}</span>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <span>{{ $racun->id_stranka }}</span>
+                        </div>
+                        <div class="col-4">
+                            <span>{{ $racun->znesek }}</span>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+
+            <div class="col-6">
+                <h3>Zgodovina naročil</h3>
+                <div class="row">
+                    <div class="col-3">
+                        <span>Datum</span>
+                    </div>
+                    <div class="col-3">
+                        <span>Račun št.</span>
+                    </div>
+                    <div class="col-2">
+                        <span>Id. stranke</span>
+                    </div>
+                    <div class="col-2">
+                        <span>Znesek</span>
+                    </div>
+                    <div class="col-2">
+                        <span>Stornacija</span>
+                    </div>
+                </div>
+
+                @foreach($zgodovinaRacuni as $racun)
+                    <div class="row">
+                        <div class="col-3">
+                            <a href="/prodaja/racuni/{{ $racun->id_racun }}"><span>{{ $racun->datum }}</span></a>
+                        </div>
+                        <div class="col-3">
+                            <span>{{ $racun->id_racun }}</span>
+                        </div>
+                        <div class="col-2">
+                            <span>{{ $racun->id_stranka }}</span>
+                        </div>
+                        <div class="col-2">
+                            <span>{{ $racun->znesek }}</span>
+                        </div>
+                        <div class="col-2">
+                            @if ( $racun->storniran_racun )
+                                <span>{{ $racun->storniran_racun }}</span>
+                            @else
+                                <span>/</span>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
+    </div>
 @endsection

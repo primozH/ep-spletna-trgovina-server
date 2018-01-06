@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             PostavkaTableSeeder::class,
             SlikaTableSeeder::class,
             OcenaTableSeeder::class,
+            VlogaTableSeeder::class,
+            VlogaUporabnikTableSeeder::class,
         ]);
     }
 }

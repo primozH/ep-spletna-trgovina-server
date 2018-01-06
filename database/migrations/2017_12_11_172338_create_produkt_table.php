@@ -17,6 +17,7 @@ class CreateProduktTable extends Migration
             $table->increments('id_produkt');
             $table->string("naziv", 255)->nullable(false);
             $table->string("opis", 2000)->nullable(false);
+            $table->boolean("aktiviran")->default(true);
             $table->decimal("povprecna_ocena", 3, 1)->default(0);
             $table->softDeletes();
             $table->timestamps();
