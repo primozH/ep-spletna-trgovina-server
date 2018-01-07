@@ -22,10 +22,22 @@ class VlogaUporabnikTableSeeder extends Seeder
                 "id_uporabnik" => 2,
             ],
             [
-                "id_vloga" => 3,
+                "id_vloga" => 2,
                 "id_uporabnik" => 3
             ],
 
+            [
+                "id_vloga" => 3,
+                "id_uporabnik" => 4
+            ],
+            [
+                "id_vloga" => 3,
+                "id_uporabnik" => 5
+            ],
+            [
+                "id_vloga" => 3,
+                "id_uporabnik" => 6
+            ],
         ];
 
         foreach ($vloge as $item)

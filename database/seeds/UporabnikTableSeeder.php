@@ -19,9 +19,26 @@ class UporabnikTableSeeder extends Seeder
         $accounts = [
             [
                 "ime" => "Janez",
+                "priimek" => "The Man",
+                "email" => "janez@admin.si",
+                "geslo" => "1234",
+            ],
+            [
+                "ime" => "Marko",
+                "priimek" => "Skače",
+                "email" => "marko.skace@trata.si",
+                "geslo" => "1234",
+            ],
+            [
+                "ime" => "Matija",
+                "priimek" => "Majer",
+                "email" => "matija.majer@dobrojutro.si",
+                "geslo" => "1234",
+            ],
+            [
+                "ime" => "Janez",
                 "priimek" => "Novak",
                 "email" => "janez@novak.si",
-                "uporabnisko_ime" => "janezek",
                 "geslo" => "1234",
                 "naslov" => "Borovnica 12",
                 "tel_stevilka" => "041999999"
@@ -30,7 +47,6 @@ class UporabnikTableSeeder extends Seeder
                 "ime" => "Krištof",
                 "priimek" => "Mirni",
                 "email" => "kristof@majka.si",
-                "uporabnisko_ime" => "kristof",
                 "geslo" => "54621",
                 "naslov" => "Maribor 12",
                 "tel_stevilka" => "051555555"
@@ -39,7 +55,6 @@ class UporabnikTableSeeder extends Seeder
                 "ime" => "Matija",
                 "priimek" => "Mako",
                 "email" => "matija@matija.si",
-                "uporabnisko_ime" => "mato",
                 "geslo" => "12345",
                 "naslov" => "Koroška Bela 12",
                 "tel_stevilka" => "069000000"
@@ -53,9 +68,14 @@ class UporabnikTableSeeder extends Seeder
             $account->priimek = $item["priimek"];
             $account->email = $item["email"];
             $account->geslo = password_hash($item["geslo"], PASSWORD_BCRYPT);
-            $account->uporabnisko_ime = $item["uporabnisko_ime"];
-            $account->naslov = $item["naslov"];
-            $account->tel_stevilka = $item["tel_stevilka"];
+            if (array_key_exists("naslov", $item))
+            {
+                $account->naslov = $item["naslov"];
+            }
+            if (array_key_exists("tel_stevilka", $item))
+            {
+                $account->tel_stevilka = $item["tel_stevilka"];
+            }
 
             $account->save();
         }

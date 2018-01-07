@@ -1,29 +1,63 @@
-@extends('stranka.layout.layout')
+@extends('admin.layout.layout')
 
-
-@section("content1")
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Domov <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Pozdravljen, Administrator!
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/posodobi-administrator">Posodobi podatke</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/upravljanje-administrator">Upravljanje računov</a>
-                </div>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-success my-2 my-sm-0" type="submit" style="position: absolute; right: 50;" href="/">Odjava</a>
-        </form>
-    </div>
-@endsection
 @section("content")
-    <h2>Artikli</h2>
+    <div class="row">
+        <div class="col-6">
+            <h2>Aktivni prodajalci</h2>
+            <div class="row">
+                    <div class="col-4">
+                        Ime
+                    </div>
+                    <div class="col-4">
+                        Priimek
+                    </div>
+                    <div class="col-4">
+                        Število naročil
+                    </div>
+            </div>
+            @foreach($prodajalci as $prodajalec)
+                <div class="row">
+                    <div class="col-4">
+                        <a href="/admin/prodajalci/{{ $prodajalec->id_uporabnik }}">
+                            {{ $prodajalec->ime }}
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        {{ $prodajalec->priimek }}
+                    </div>
+                    <div class="col-4">
+                        {{ $prodajalec->ordersForSalesman()->count() }}
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="col-6">
+            <h2>Neaktivni prodajalci</h2>
+            <div class="row">
+                <div class="col-4">
+                    Ime
+                </div>
+                <div class="col-4">
+                    Priimek
+                </div>
+            </div>
+            @foreach($neaktivni as $prodajalec)
+                <div class="row">
+                    <div class="col-4">
+                        <a href="/admin/prodajalci/{{ $prodajalec->id_uporabnik }}">
+                            {{ $prodajalec->ime }}
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        {{ $prodajalec->priimek }}
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <a href="/admin/prodajalci" class="btn btn-success">Dodaj prodajalca</a>
+        </div>
+    </div>
 @endsection

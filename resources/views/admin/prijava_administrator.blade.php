@@ -1,16 +1,15 @@
-@extends('stranka.layout.layout')
+@extends('admin.layout.layout')
 
 
 @section("content")
     <h2>Administrator</h2>
-    <form action="/" method="post">
+    <form action="/admin/prijava" method="post">
         Uporabniško ime:<br>
-        <input type="text" name="up_ime"><br>
+        <input type="text" name="email"><br>
         Geslo:<br>
         <input type="password" name="geslo"><br><br>
         <div class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/izdelki-administrator">Prijava</a>
+            <button type="submit" class="btn btn-success">Prijava</button>
         </div>
     </form>
-    <a href="/"><p style="font-size: 20px;position: fixed;bottom: 5;right: 15;color: green; ">Nazaj</p></a>
 @endsection

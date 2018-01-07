@@ -17,9 +17,8 @@ class CreateUporabnikTable extends Migration
             $table->increments('id_uporabnik');
             $table->string("ime", 45)->nullable(false);
             $table->string("priimek", 100)->nullable(false);
-            $table->string("uporabnisko_ime", 100)->nullable(false)->unique();
-            $table->string("email", 255)->nullable(false);
-            $table->string("naslov", 255);
+            $table->string("email", 255)->nullable(false)->unique();
+            $table->string("naslov", 255)->nullable(true);
             $table->string("tel_stevilka", 15)->nullable(true);
             $table->string("geslo", 255);
             $table->boolean("potrjen")->default(false);
