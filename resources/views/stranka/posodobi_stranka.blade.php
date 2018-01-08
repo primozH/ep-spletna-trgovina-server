@@ -2,26 +2,30 @@
 
 @section("content")
 
-    <form action="/" method="post">
+    <form action="/profil" method="post">
+        @if (! empty($error))
+            <div role="alert" class="alert alert-danger">{{ $error }}</div>
+        @endif
+        {{ csrf_field() }}
         Ime:<br>
-        <input type="text" name="up_ime"><br>
+        <input type="text" name="ime" required value="{{ $stranka->ime }}"><br>
         Priimek:<br>
-        <input type="text" name="geslo"><br>
+        <input type="text" name="priimek" value="{{ $stranka->priimek }}" required><br>
         E-mail:<br>
-        <input type="text" name="el_naslov"><br>
+        <input type="email" name="email" value="{{ $stranka->email }}" required><br>
         Naslov:<br>
-        <input type="text" name="naslov"><br>
+        <input type="text" name="naslov" value="{{ $stranka->naslov }}" required><br>
         Telefonska številka:<br>
-        <input type="text" name="tel_stevilka"><br>
+        <input type="text" name="tel_stevilka" value="{{ $stranka->tel_stevilka }}" required><br>
         Staro geslo:<br>
-        <input type="password" name="staro_geslo"><br>
+        <input type="password" name="geslo_staro"><br>
         Geslo:<br>
-        <input type="password" name="novo_geslo"><br>
+        <input type="password" name="geslo"><br>
         Ponovno vpiši geslo:<br>
-        <input type="password" name="novo_geslo"><br><br>
+        <input type="password" name="geslo_rep"><br><br>
 
         <div class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/izdelki-stranka">Posodobi</a>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Posodobi</button>
         </div>
     </form>
 

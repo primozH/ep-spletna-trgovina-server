@@ -27,7 +27,9 @@
                 @break
             @endforeach
 
-            <button class="btn btn-danger add-to-cart">V košarico</button>
+            @if (session()->has("userId"))
+                <button class="btn btn-danger add-to-cart">V košarico</button>
+            @endif
         </div>
         @if ($loop->index % 4 == 3 or $loop->last)
             </div>

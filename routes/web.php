@@ -26,9 +26,10 @@ Route::post("registracija", "LoginController@verifyRegister");
 /* STRANKA */
 Route::middleware("logged")->group(function() {
 
-    Route::get("/stranka/{strankaId}/profil", "UserController@updateUser");
-    Route::get('/stranka/{strankaId}/zgodovina', "InvoiceController@listInvoices");
-    Route::get('stranka/{strankaId}/racun/{racunId}', "InvoiceController@invoiceDetail");
+    Route::get("/profil", "UserController@getUser");
+    Route::post("/profil", "UserController@updateUser");
+    Route::get('/racuni', "InvoiceController@listInvoices");
+    Route::get('/racuni/{racunId}', "InvoiceController@invoiceDetail");
 
     Route::get("/kosarica", "CartController@showCart");
     Route::post("/kosarica", "CartController@addToCart");

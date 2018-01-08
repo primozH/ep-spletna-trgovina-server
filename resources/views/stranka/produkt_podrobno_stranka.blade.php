@@ -16,7 +16,9 @@
         <p>{{ $product->povprecna_ocena }}</p>
     </span>
 
-    <button class="btn btn-success">V košarico</button>
+    @if (session()->has("userId"))
+        <button class="btn btn-danger add-to-cart">V košarico</button>
+    @endif
 
     <div id="images" class="row">
         <div id="carouselImage" class="carousel slide col-md-6 offset-md-3" data-ride="carousel">
