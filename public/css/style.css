@@ -1,3 +1,11 @@
 .clickable:hover {
     cursor: pointer;
 }
+
+.cart-item {
+    border: 2px solid #14ff00;
+    border-radius: 10px;
+    background-color: #d3ffcc;
+    margin-top: 5px;
+
+}

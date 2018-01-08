@@ -6,6 +6,21 @@ $(document).ready(function() {
         window.location = "/izdelki/" + id;
     });
 
+    var calculateSum = function() {
+        $.get("/kosarica/vsebina", function(response, status) {
+            if (status == "success") {
+                sum = 0;
+                response.items.forEach(function (element) {
+                    sum += parseInt(element.cena) * parseInt(element.kolicina);
+                });
+
+                $("#price").text(sum);
+            }
+        })
+    };
+
+    calculateSum();
+
     $(".add-to-cart").click(function(event) {
         var id = $(this).parent().attr("id");
         id = parseInt(id);
@@ -16,7 +31,7 @@ $(document).ready(function() {
             if (status === "success") {
                 sum = 0;
                 response.items.forEach(function (element) {
-                    sum += parseInt(element.cena);
+                    sum += parseInt(element.cena) * parseInt(element.kolicina);
                 })
                 $("#price").text(sum);
             }

@@ -32,6 +32,8 @@ Route::middleware("logged")->group(function() {
 
     Route::get("/kosarica", "CartController@showCart");
     Route::post("/kosarica", "CartController@addToCart");
+    Route::get("/kosarica/vsebina", "CartController@getCart");
+    Route::get("/kosarica/{id}", "CartController@removeFromCart");
 });
 
 

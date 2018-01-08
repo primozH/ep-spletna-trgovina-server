@@ -15,11 +15,14 @@ class Kosarica extends Resource
 {
     public function toArray($request)
     {
+        $produkt = $this->product;
         return [
             "id_produkt" => $this->id_produkt,
+            "naziv" => $produkt->naziv,
+            "cena" => $produkt->currentPrice()->cena,
+            "valuta" => $produkt->currentPrice()->valuta,
             "id_uporabnik" => $this->id_uporabnik,
             "kolicina" => $this->kolicina,
-            "cena" => $this->product->currentPrice()->cena,
         ];
     }
 }

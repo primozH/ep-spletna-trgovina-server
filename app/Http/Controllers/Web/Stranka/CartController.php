@@ -15,13 +15,26 @@ class CartController extends Controller
     {
         $id_uporabnik = $request->session()->get("userId");
         $items = Kosarica::where("id_uporabnik", $id_uporabnik)->get();
-        return view("stranka.kosarica", ["items" => $items]);
+
+        $cartItems = array();
+        foreach($items as $item) {
+            $cartItems[] = [
+                "id_produkt" => $item->id_produkt,
+                "naziv" => $item->product->naziv,
+                "cena" => $item->product->currentPrice()->cena,
+                "valuta" => $item->product->currentPrice()->valuta,
+                "kolicina" => $item->kolicina,
+            ];
+        }
+
+        return view("stranka.kosarica", ["items" => $cartItems]);
     }
 
     public function addToCart(Request $request)
     {
         $temp = $request->validate([
-            "id_produkt" => "required"
+            "id_produkt" => "required",
+            "kolicina" => "nullable",
         ]);
 
         $produkt = Produkt::findOrFail($temp["id_produkt"]);
@@ -39,12 +52,12 @@ class CartController extends Controller
             Kosarica::where([
                 ["id_uporabnik", $id_uporabnik],
                 ["id_produkt", $produkt->id_produkt]
-            ])->update(["kolicina" => $cart->kolicina + 1]);
+            ])->update(["kolicina" => array_key_exists("kolicina", $temp) ? $temp["kolicina"] : $cart->kolicina + 1]);
 
         } else {
             $item = new Kosarica;
             $item->id_produkt = $produkt->id_produkt;
-            $item->kolicina = 1;
+            $item->kolicina = array_key_exists("kolicina", $temp) ? $temp["kolicina"] : 1;
 
             $uporabnik->cartItems()->save($item);
         }
@@ -52,5 +65,19 @@ class CartController extends Controller
         $cartItems = $uporabnik->cartItems()->get();
 
         return response(["items" => KosaricaResource::collection($cartItems)]);
+    }
+
+    public function getCart(Request $request)
+    {
+        $userid = $request->session()->get("userId");
+
+        $cartItems = Kosarica::where("id_uporabnik", $userid)->get();
+        return response(["items" => KosaricaResource::collection($cartItems)]);
+    }
+
+    public function removeFromCart(Request $request, $id) {
+        Kosarica::where("id_produkt", $id)->delete();
+
+        return response("", 204);
     }
 }
