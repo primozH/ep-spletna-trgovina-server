@@ -16,14 +16,10 @@ class Kosarica extends Resource
     public function toArray($request)
     {
         return [
-            "id" => $this->id_racun,
-            "datum" => $this->datum,
-            "storniran" => $this->storniran,
-            "status" => $this->status,
-            "id_prodajalec" => $this->id_prodajalec,
-            "id_stranka" => $this->id_stranka,
-            "znesek" => $this->znesek,
-            "postavke" => $this->invoiceItems
+            "id_produkt" => $this->id_produkt,
+            "id_uporabnik" => $this->id_uporabnik,
+            "kolicina" => $this->kolicina,
+            "cena" => $this->product->currentPrice()->cena,
         ];
     }
 }

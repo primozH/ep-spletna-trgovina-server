@@ -7,6 +7,7 @@ use App\Kosarica;
 use App\Produkt;
 use App\Uporabnik;
 use Illuminate\Http\Request;
+use App\Http\Resources\Kosarica as KosaricaResource;
 
 class CartController extends Controller
 {
@@ -50,6 +51,6 @@ class CartController extends Controller
 
         $cartItems = $uporabnik->cartItems()->get();
 
-        return response(["items" => $cartItems]);
+        return response(["items" => KosaricaResource::collection($cartItems)]);
     }
 }

@@ -19,7 +19,8 @@ class Produkt extends Resource
                 "naziv" => $this->naziv,
                 "opis" => $this->opis,
                 "cena" => $this->currentPrice()->cena,
-                "ocena" => $this->povprecna_ocena
+                "ocena" => $this->povprecna_ocena,
+                "slike" => $this->images()->get(),
         ];
     }
 }
