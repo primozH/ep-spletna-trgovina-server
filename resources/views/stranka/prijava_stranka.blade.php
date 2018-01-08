@@ -6,10 +6,10 @@
     <form action="/prijava" method="post" class="form-horizontal">
         {{ csrf_field() }}
         <div class="form-group">
-            <label for="uporabnisko_ime" class="col-12 col-md-6 offset-md-3 control-label">Uporabniško ime</label>
+            <label for="email" class="col-12 col-md-6 offset-md-3 control-label">Email</label>
             <div class="col-12 col-md-6 offset-md-3">
 
-                <input id="uporabnisko_ime" type="text" name="uporabnisko_ime" value="{{ old('uporabnisko_ime') }}" class="form-control" required autofocus>
+                <input id="uporabnisko_ime" type="text" name="email" value="{{ old('email') }}" class="form-control" required autofocus>
 
             </div>
         </div>
@@ -27,7 +27,7 @@
 
             <div class="col-12 col-md-6 offset-md-3">
 
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/izdelki-stranka">Prijava</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Prijava</button>
             </div>
         </div>
     </form>

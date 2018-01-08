@@ -27,3 +27,7 @@ Route::delete("/invoices/{id_invoice}", "InvoiceController@deleteInvoice");
 Route::post("/login", "LoginController@login");
 Route::post("/register", "LoginController@register");
 Route::get("/register/verify", "LoginController@verifyRegister");
+
+
+Route::get("/cart", "CartController@getCart");
+Route::post("/cart", "CartController@addToCart");

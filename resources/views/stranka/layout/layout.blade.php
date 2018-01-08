@@ -5,41 +5,6 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ URL::asset("css/style.css") }}" />
         <title>Spletna trgovina</title>
-        <style>
-            table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-            }
-
-            td, th {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-
-            tr:nth-child(even) {
-                background-color: #dddddd;
-            }
-
-
-
-        </style>
-        <script>
-            function allowDrop(ev) {
-                ev.preventDefault();
-            }
-
-            function drag(ev) {
-                ev.dataTransfer.setData("text", ev.target.id);
-            }
-
-            function drop(ev) {
-                ev.preventDefault();
-                var data = ev.dataTransfer.getData("text");
-                ev.target.appendChild(document.getElementById(data));
-            }
-        </script>
     </head>
 
     <body>
@@ -49,22 +14,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Možnosti
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/prijava-administrator">Prijava kot administrator</a>
-                            <a class="dropdown-item" href="/prijava-prodajalec">Prijava kot prodajalec</a>
-                            <a class="dropdown-item" href="/zgodovina-nakupov">Zgodovina nakupov</a>
-                            <a class="dropdown-item" href="/kosarica">Košarica</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/odjava">Odjava</a>
-                        </div>
-                    </li>
-                </ul>
-                @if(!session()->has("userid"))
+                @if(!session()->has("userId"))
                     <form class="form-inline my-2 my-lg-0">
                         <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/prijava">Prijava</a>
                         <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/registracija">Registracija</a>

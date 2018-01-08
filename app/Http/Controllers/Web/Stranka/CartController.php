@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Web\Stranka;
 
 use App\Http\Controllers\Controller;
+use App\Kosarica;
 use App\Produkt;
+use App\Uporabnik;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
     public function showCart(Request $request)
     {
-        if($request->session()->exists("kosarica")) {
-            $items = $request->session()->get("kosarica");
-        } else {
-            $items = ["items" => array()];
-        }
-        return view("stranka.kosarica", $items);
+        $id_uporabnik = $request->session()->get("userId");
+        $items = Kosarica::where("id_uporabnik", $id_uporabnik)->get();
+        return view("stranka.kosarica", ["items" => $items]);
     }
 
     public function addToCart(Request $request)
@@ -24,25 +23,33 @@ class CartController extends Controller
             "id_produkt" => "required"
         ]);
 
-        $temp = Produkt::findOrFail($temp["id_produkt"]);
+        $produkt = Produkt::findOrFail($temp["id_produkt"]);
 
-        $izdelek = [
-            "id" => $temp->id_produkt,
-            "naziv" => $temp->naziv,
-            "cena" => $temp->currentPrice()->cena,
-            "kolicina" => 1,
-            "valuta" => $temp->currentPrice()->valuta
-        ];
+        $id_uporabnik = $request->session()->get("userId");
+        $uporabnik = Uporabnik::find($id_uporabnik);
+
+        $cart = Kosarica::where([
+            ["id_uporabnik", $id_uporabnik],
+            ["id_produkt", $produkt->id_produkt]])->first();
 
 
-        if(!$request->session()->exists("kosarica")) {
-            $request->session()->put("kosarica", array());
+        if (!is_null($cart))
+        {
+            Kosarica::where([
+                ["id_uporabnik", $id_uporabnik],
+                ["id_produkt", $produkt->id_produkt]
+            ])->update(["kolicina" => $cart->kolicina + 1]);
+
+        } else {
+            $item = new Kosarica;
+            $item->id_produkt = $produkt->id_produkt;
+            $item->kolicina = 1;
+
+            $uporabnik->cartItems()->save($item);
         }
 
-        $request->session()->push("kosarica.items", $izdelek);
+        $cartItems = $uporabnik->cartItems()->get();
 
-
-
-        return response($request->session()->get("kosarica"));
+        return response(["items" => $cartItems]);
     }
 }

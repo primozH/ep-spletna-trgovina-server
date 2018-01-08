@@ -47,14 +47,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="uporabnisko_ime" class="col-12 col-md-4 offset-md-3 control-label">Uporabniško ime</label>
-                <div class="col-md-6 offset-md-3">
-
-                    <input id="uporabnisko_ime" type="text" name="uporabnisko_ime" class="form-control" required>
-
-                </div>
-            </div>
-            <div class="form-group">
                 <label for="geslo" class="col-12 col-md-4 offset-md-3 control-label">Geslo</label>
                 <div class="col-md-6 offset-md-3">
 
@@ -80,8 +72,16 @@
             </div>
         </form>
     </div>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </div>
-    <a href="/"><p style="font-size: 20px;position: fixed;bottom: 5;right: 15;color: green; ">Nazaj</p></a>
 
 
 @endsection

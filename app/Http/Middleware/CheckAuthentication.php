@@ -15,7 +15,7 @@ class CheckAuthentication
      */
     public function handle($request, Closure $next)
     {
-        if ($request->session()->has("userid")) {
+        if ($request->session()->has("userId")) {
             return $next($request);
         }
         return redirect("/prijava");

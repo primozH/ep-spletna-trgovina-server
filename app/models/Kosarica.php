@@ -6,7 +6,7 @@
  * Time: 14:34
  */
 
-namespace App\models;
+namespace App;
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +18,8 @@ class Kosarica extends Model
     protected $primaryKey = ["id_uporabnik", "id_produkt"];
 
     public $incrementing = false;
+
+    protected $fillable = ["kosarica"];
 
 
     public function user()
