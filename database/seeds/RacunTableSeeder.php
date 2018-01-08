@@ -14,10 +14,13 @@ class RacunTableSeeder extends Seeder
     {
         $invoices = [
             [
-                "id_stranka"=>1
+                "id_stranka"=>4
             ],
             [
-                "id_stranka" => 2
+                "id_stranka" => 5
+            ],
+            [
+                "id_stranka" => 5
             ]
         ];
 

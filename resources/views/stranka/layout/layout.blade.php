@@ -22,6 +22,7 @@
                     </form>
                 @else
                     <a class="btn btn-outline-success" href="/profil">Profil</a>
+                    <a href="/racuni">Zgodovina nakupov</a>
                     <a class="btn btn-outline-success" href="/odjava">Odjava</a>
                     <a class="btn btn-outline-danger" id="shoppingCartBtn" href="/kosarica">
                         <i class="fas fa-shopping-cart"></i>

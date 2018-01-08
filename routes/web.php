@@ -30,6 +30,7 @@ Route::middleware("logged")->group(function() {
     Route::post("/profil", "UserController@updateUser");
     Route::get('/racuni', "InvoiceController@listInvoices");
     Route::get('/racuni/{racunId}', "InvoiceController@invoiceDetail");
+    Route::post("/racuni", "InvoiceController@createInvoice");
 
     Route::get("/kosarica", "CartController@showCart");
     Route::post("/kosarica", "CartController@addToCart");

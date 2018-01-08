@@ -17,7 +17,7 @@ class CreateRacunTable extends Migration
             $table->increments("id_racun");
             $table->date("datum")->nullable(true);
             $table->integer("storniran_racun", false, true)->nullable(true);
-            $table->enum("status", ["potrjen", "preklican", "odprt", "zakljucen"])->default("odprt");
+            $table->enum("status", ["potrjen", "preklican", "odprt", "zakljucen", "storniran"])->default("odprt");
             $table->integer("id_prodajalec", false, true)->nullable(true);
             $table->integer("id_stranka", false, true)->nullable(false);
             $table->decimal("znesek", 8, 2)->default(0);
