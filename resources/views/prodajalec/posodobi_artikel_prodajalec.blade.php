@@ -5,6 +5,7 @@
         <h1>{{ $izdelek->naziv }}</h1>
 
         <form action="/prodaja/izdelki/{{ $izdelek->id_produkt }}" method="post">
+            {{ csrf_field() }}
             Naziv:<br>
             <input type="text" name="naziv" value="{{ $izdelek->naziv }}"><br>
             Opis:<br>

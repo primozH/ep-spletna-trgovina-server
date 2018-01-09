@@ -3,9 +3,8 @@
 
 @section("content")
     <h2>Prodajalec</h2>
-    <form action="/prodaja/login" method="post">
-        Uporabniško ime:<br>
-        <input type="text" name="uporabnisko_ime"><br>
+    <form action="/prodaja/prijava" method="post">
+        {{ csrf_field() }}
         Geslo:<br>
         <input type="password" name="geslo"><br><br>
         <div class="form-inline my-2 my-lg-0">

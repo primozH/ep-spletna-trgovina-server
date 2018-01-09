@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-6">
             <form action="/admin/profil" method="post">
+                {{ csrf_field() }}
                 Ime:<br>
                 <input type="text" name="ime"><br>
                 Priimek:<br>

@@ -4,6 +4,7 @@
     @if($stranka)
         <h1>{{ $stranka->ime }}</h1>
         <form action="/prodaja/stranke/{{ $stranka->id_uporabnik }}" method="post">
+            {{ csrf_field() }}
             Ime:<br>
             <input type="text" name="ime" value="{{ $stranka->ime }}" required><br>
             Priimek:<br>

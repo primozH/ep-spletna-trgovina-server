@@ -18,6 +18,24 @@ class UporabnikTableSeeder extends Seeder
     private function seedData() {
         $accounts = [
             [
+                "ime" => "Marko",
+                "priimek" => "Zajc",
+                "email" => "admin@etrgovina.si",
+                "geslo" => "admin"
+            ],
+            [
+                "ime" => "Miha",
+                "priimek" => "Mazovec",
+                "email" => "miha.mazovec@gmail.com",
+                "geslo" => "miham"
+            ],
+            [
+                "ime" => "Primož",
+                "priimek" => "Hrovat",
+                "email" => "primoz.hrovat.96@gmail.com",
+                "geslo" => "primoz"
+            ],
+            [
                 "ime" => "Janez",
                 "priimek" => "The Man",
                 "email" => "janez@admin.si",

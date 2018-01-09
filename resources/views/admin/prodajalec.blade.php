@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-6 offset-3">
                 <form action="/admin/prodajalci/{{ $prodajalec->id_uporabnik }}" method="post">
+                    {{ csrf_field() }}
                     Ime:<br>
                     <input type="text" name="ime" value="{{ $prodajalec->ime }}" required><br>
                     Priimek:<br>

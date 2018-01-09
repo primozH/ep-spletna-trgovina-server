@@ -10,6 +10,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light">
             <a class="navbar-brand" href="/admin">Administrator: Spletna trgovina EP</a>
+            @if(session()->has("adminId"))
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -19,8 +20,9 @@
                         <a href="/admin/profil">Profil</a>
                     </li>
                 </ul>
-                <a class="btn btn-outline-success" href="/odjava">Odjava</a>
+                <a class="btn btn-outline-success" href="/admin/odjava">Odjava</a>
             </div>
+            @endif
         </nav>
 
         <div class="container-fluid">

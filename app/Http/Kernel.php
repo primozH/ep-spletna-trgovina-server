@@ -38,6 +38,20 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+        'sales' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+        ],
+        'admin' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+        ]
     ];
 
     /**
@@ -55,6 +69,8 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         "logged" => \App\Http\Middleware\CheckAuthentication::class,
-        "jwt-auth" => \App\Http\Middleware\AuthJWT::class,
+        "salesLogged" => \App\Http\Middleware\Prodajalec\CheckAuthentication::class,
+        "adminLogged" => \App\Http\Middleware\Admin\CheckAuthentication::class,
+
     ];
 }

@@ -7,6 +7,7 @@
 
         <div class="col-6">
             <form method="post" action="/prodaja/racuni/{{ $racun->id_racun }}" class="form-horizontal">
+                {{ csrf_field() }}
                 <div class="col-4">
                     <span>Račun št. {{ $racun->id_racun }}</span>
                 </div>
@@ -24,6 +25,7 @@
                         <option value="preklican" @if($racun->status == "preklican") selected @endif>Preklican</option>
                         <option value="zakljucen" @if($racun->status == "zakljucen") selected @endif>Zaključen</option>
                         <option value="odprt" @if($racun->status == "odprt") selected @endif >Odprt</option>
+                        <option value="storniran" @if($racun->status == "storniran") selected @endif >Storniran</option>
                     </select>
                 </div>
                 <div>
@@ -39,6 +41,7 @@
             </form>
             @if ($racun->status == "potrjen")
                 <form method="post" action="/prodaja/racuni/{{ $racun->id_racun }}/storniraj" class="form-horizontal">
+                    {{ csrf_field() }}
                     <button type="submit" class="btn btn-warning">Storniraj račun</button>
                 </form>
             @endif

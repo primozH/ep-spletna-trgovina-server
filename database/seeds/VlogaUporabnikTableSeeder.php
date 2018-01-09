@@ -38,6 +38,18 @@ class VlogaUporabnikTableSeeder extends Seeder
                 "id_vloga" => 3,
                 "id_uporabnik" => 6
             ],
+            [
+                "id_vloga" => 3,
+                "id_uporabnik" => 7
+            ],
+            [
+                "id_vloga" => 3,
+                "id_uporabnik" => 8
+            ],
+            [
+                "id_vloga" => 3,
+                "id_uporabnik" => 9
+            ],
         ];
 
         foreach ($vloge as $item)

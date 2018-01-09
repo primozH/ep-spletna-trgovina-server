@@ -10,6 +10,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light">
             <a class="navbar-brand" href="/prodaja">Prodaja: Spletna trgovina EP</a>
+            @if(session()->has("salesId"))
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -27,6 +28,7 @@
                 </ul>
                 <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/prodaja/odjava">Odjava</a>
             </div>
+            @endif
         </nav>
 
         <div class="container-fluid">
