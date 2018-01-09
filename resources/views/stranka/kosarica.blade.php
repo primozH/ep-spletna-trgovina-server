@@ -26,7 +26,7 @@
 
         @endforelse
     <div class="col-3 offset-2">
-        <button type="submit" class="btn btn-success" id="next">Nadaljuj z nakupom</button>
+        <a type="submit" class="btn btn-success" id="next" href="/kosarica/zakljucek">Nadaljuj z nakupom</a>
     </div>
 @endsection
 @section("script")

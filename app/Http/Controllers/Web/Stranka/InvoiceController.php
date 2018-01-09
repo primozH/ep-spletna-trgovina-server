@@ -18,9 +18,13 @@ class InvoiceController extends Controller
 
         $user = Uporabnik::find($userId);
 
-        $invoices = $user->ordersForCustomer()->get();
+        $invoices = $user->ordersForCustomer();
 
-        return view("stranka.zgodovina", ["racuni" => $invoices]);
+        $open = $invoices->where("status", "odprt")->get();
+        $confirmed = $invoices->where("status", "potrjen")->get();
+        $cancelled = $invoices->where("status", "storniran")->get();
+
+        return view("stranka.zgodovina", ["odprt" => $open, "potrjen" => $confirmed, "storniran" => $cancelled]);
     }
 
     public function invoiceDetail(Request $request, $id) {
@@ -36,7 +40,7 @@ class InvoiceController extends Controller
         $user = Uporabnik::find($userId);
 
         $invoice = new Racun;
-        $user->invoices()->save($invoice);
+        $user->ordersForCustomer()->save($invoice);
 
         $this->addItemsToInvoice($user, $invoice);
 
@@ -46,7 +50,7 @@ class InvoiceController extends Controller
 
 
     private function addItemsToInvoice(Uporabnik $user, Racun $invoice) {
-        $items = $user->cartItems();
+        $items = $user->cartItems()->get();
         $invoiceItems = array();
 
         foreach ($items as $item) {
@@ -60,7 +64,7 @@ class InvoiceController extends Controller
 
         $invoice->invoiceItems()->saveMany($invoiceItems);
 
-        $items->delete();
+        Kosarica::where("id_uporabnik", $user->id_uporabnik)->delete();
 
         return;
     }

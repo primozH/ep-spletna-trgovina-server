@@ -46,8 +46,5 @@ $(document).ready(function() {
         } )
     });
 
-    $("#next").click(function(event) {
-        $("input").prop("disabled", true);
-        $(this).text("Zaključi nakup");
-    });
+
 });

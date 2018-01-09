@@ -30,11 +30,12 @@ Route::middleware("logged")->group(function() {
     Route::post("/profil", "UserController@updateUser");
     Route::get('/racuni', "InvoiceController@listInvoices");
     Route::get('/racuni/{racunId}', "InvoiceController@invoiceDetail");
-    Route::post("/racuni", "InvoiceController@createInvoice");
+    Route::post('/racuni', "InvoiceController@createInvoice");
 
     Route::get("/kosarica", "CartController@showCart");
     Route::post("/kosarica", "CartController@addToCart");
     Route::get("/kosarica/vsebina", "CartController@getCart");
+    Route::get("/kosarica/zakljucek", "CartController@showOffer");
     Route::get("/kosarica/{id}", "CartController@removeFromCart");
 });
 

@@ -30,6 +30,27 @@ class CartController extends Controller
         return view("stranka.kosarica", ["items" => $cartItems]);
     }
 
+    public function showOffer(Request $request)
+    {
+        $id_uporabnik = $request->session()->get("userId");
+        $items = Kosarica::where("id_uporabnik", $id_uporabnik)->get();
+
+        $cartItems = array();
+        $sum = 0;
+        foreach($items as $item) {
+            $sum += $item->product->currentPrice()->cena;
+            $cartItems[] = [
+                "id_produkt" => $item->id_produkt,
+                "naziv" => $item->product->naziv,
+                "cena" => $item->product->currentPrice()->cena,
+                "valuta" => $item->product->currentPrice()->valuta,
+                "kolicina" => $item->kolicina,
+            ];
+        }
+
+        return view("stranka.predracun", ["items" => $cartItems, "sum" => $sum]);
+    }
+
     public function addToCart(Request $request)
     {
         $temp = $request->validate([
