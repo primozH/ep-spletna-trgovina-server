@@ -5,12 +5,13 @@
     </head>
     <body>
         <div>
-            Pozdravljen/a {{ $ime }}
+            Pozdravljen/a {{ $ime }}!
             <br/>
-            Hvala...
+            Ustvarili ste račun pri spletni trgovini EP.
+            Za potrditev registracije prosim obiščite spodnjo povezavo.
             <br/>
 
-            <a href="{{ url("registracija/potrdi", $token) }}">Potrdi račun!</a>
+            <a href="{{ url("registracija/potrdi?code=" . $token . "&user=" . $id) }}">Potrdi registracijo!</a>
 
             <br/>
         </div>

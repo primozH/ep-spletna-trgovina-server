@@ -11,9 +11,11 @@ namespace App\Http\Controllers\Web\Stranka;
 
 use App\EmailPotrditev;
 use App\Http\Controllers\Controller;
+use App\Mail\RegistrationConfirmation;
 use App\Uporabnik;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class LoginController extends Controller
@@ -42,16 +44,18 @@ class LoginController extends Controller
             "geslo" => "required",
         ]);
 
-        $uporabnik = Uporabnik::where("email", htmlspecialchars($data["email"]))->first();
+        $uporabnik = Uporabnik::where("email", htmlspecialchars($data["email"]))
+                    ->where("aktiviran", true)
+                    ->first();
 
         if ($uporabnik) {
             if (password_verify(htmlspecialchars($data["geslo"]), $uporabnik->geslo)) {
                 $request->session()->put("userId", $uporabnik->id_uporabnik);
                 return redirect("/");
             }
+            return view("stranka.prijava_stranka", ["error", "Napačen mail/geslo"]);
         }
-
-        return view("stranka.prijava_stranka", []);
+        return view("stranka.prijava_stranka", ["error", "Nepotrjena registracija"]);
     }
 
     public function verifyRegister(Request $request)
@@ -76,10 +80,36 @@ class LoginController extends Controller
         $email_token->zeton = $verification_code;
         $email_token->id_uporabnik = $user->id_uporabnik;
 
-        /* SEND MAIL */
+        $email_token->save();
+
+        Mail::to("primoz.hrovat.96@gmail.com")->send(new RegistrationConfirmation($user, $verification_code));
 
         return view("stranka.status_registracija", ["uspesno" => true, "sporocilo" => "Hvala za registracijo!"
             ." Prosimo preverite e-poštni nabiralnik, da zaključite postopek registracije."]);
+    }
+
+    public function confirmVerificationCode(Request $request) {
+        $code = htmlspecialchars($request->query("code"));
+        $user = htmlspecialchars($request->query("user"));
+
+        if (!$user or !$code)
+        {
+            return view("stranka.status_registracija", ["error" => "Napaka pri potrjevanju!"]);
+        }
+
+        $confirm = EmailPotrditev::findOrFail($user);
+
+        if ($confirm->zeton == $code)
+        {
+            $usr = Uporabnik::find($user);
+            $usr->potrjen = true;
+
+            EmailPotrditev::where("id_uporabnik", $user)->delete();
+            return view("stranka.status_registracija", ["uspesno" => "Uspešna potrditev."]);
+        } else {
+            return view("stranka.status_registracija", ["error" => "Napaka pri potrjevanju!"]);
+        }
+
     }
 
     protected function verifyCAPTCHA($token) {
@@ -102,12 +132,12 @@ class LoginController extends Controller
     protected function create(array $data)
     {
         return Uporabnik::create([
-            'ime' => $data['ime'],
-            'priimek' => $data['priimek'],
-            "email" => $data["email"],
-            "tel_stevilka" => $data["tel_stevilka"],
-            "naslov" => $data["naslov"],
-            'geslo' => password_hash($data['geslo'], PASSWORD_BCRYPT),
+            'ime' => htmlspecialchars($data['ime']),
+            'priimek' => htmlspecialchars($data['priimek']),
+            "email" => htmlspecialchars($data["email"]),
+            "tel_stevilka" => htmlspecialchars($data["tel_stevilka"]),
+            "naslov" => htmlspecialchars($data["naslov"]),
+            'geslo' => password_hash(htmlspecialchars($data['geslo']), PASSWORD_BCRYPT),
         ]);
     }
 

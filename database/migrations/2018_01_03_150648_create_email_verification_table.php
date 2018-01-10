@@ -14,7 +14,6 @@ class CreateEmailVerificationTable extends Migration
     public function up()
     {
         Schema::create('email_potrditev', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer("id_uporabnik", false, true);
             $table->string("zeton");
             $table->timestamps();
@@ -22,6 +21,8 @@ class CreateEmailVerificationTable extends Migration
             $table->foreign("id_uporabnik")
                 ->references("id_uporabnik")
                 ->on("uporabnik");
+
+            $table->primary("id_uporabnik");
         });
     }
 

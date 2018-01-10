@@ -22,6 +22,7 @@ Route::get("/odjava", "LoginController@logout");
 /* REGISTRACIJA */
 Route::get('/registracija', "LoginController@register")->name("register");
 Route::post("registracija", "LoginController@verifyRegister");
+Route::get("/registracija/potrdi", "LoginController@confirmVerificationCode");
 
 /* STRANKA */
 Route::middleware("logged")->group(function() {
