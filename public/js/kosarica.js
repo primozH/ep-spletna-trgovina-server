@@ -15,7 +15,7 @@ $(document).ready(function() {
     calculateSum();
 
     $("input").change(function(event) {
-        var id = $(this).parent().parent().attr("id");
+        var id = $(this).parent().parent().parent().attr("id");
         id = parseInt(id);
         var kolicina = $(this).val();
 
@@ -36,7 +36,7 @@ $(document).ready(function() {
     });
 
     $(".cancel").click(function(event) {
-        var id = $(this).parent().parent().attr("id");
+        var id = $(this).parent().parent().parent().attr("id");
         var url = "/kosarica/" + id;
         $.get(url, function (response, status) {
             if (status === "nocontent") {

@@ -2,26 +2,8 @@
 
 @section("content")
     <h1>{{ $product->naziv }}</h1>
-    <p>{{ $product->opis }}</p>
-    <p>{{ $product->currentPrice()->cena }} {{ $product->currentPrice()->valuta }}</p>
-
-    <span>
-    @for ($i = 1; $i <= 5; $i++)
-        @if ($product->povprecna_ocena >= $i)
-            <i class="fas fa-star fa-2x"></i>
-        @else
-            <i class="far fa-star fa-2x"></i>
-        @endif
-    @endfor
-        <p>{{ $product->povprecna_ocena }}</p>
-    </span>
-
-    @if (session()->has("userId"))
-        <button class="btn btn-danger add-to-cart">V košarico</button>
-    @endif
-
     <div id="images" class="row">
-        <div id="carouselImage" class="carousel slide col-md-6 offset-md-3" data-ride="carousel">
+        <div id="carouselImage" class="carousel slide col-md-4 offset-md-4" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 @foreach ($product->images as $image)
                     <div class="carousel-item {{ $loop->first ? "active": "" }}">
@@ -40,4 +22,35 @@
             </a>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <p>{{ $product->opis }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 col-md-2">
+            <p>{{ $product->currentPrice()->cena }} {{ $product->currentPrice()->valuta }}</p>
+        </div>
+        <div class="col-8 col-md-3">
+            <span id="grade">
+
+                @for ($i = 1; $i <= 5; $i++)
+                    @if ($product->povprecna_ocena >= $i)
+                        <i class="fas fa-star fa-2x"></i>
+                    @else
+                        <i class="far fa-star fa-2x"></i>
+                    @endif
+                @endfor
+                <p>{{ $product->povprecna_ocena }}</p>
+            </span>
+        </div>
+    </div>
+
+
+    @if (session()->has("userId"))
+        <button id="{{ $product->id_produkt }}" class="btn btn-danger add-to-cart">V košarico</button>
+    @endif
+@endsection
+@section("script")
+    <script src="{{ URL::asset("js/izdelek.js") }}"></script>
 @endsection

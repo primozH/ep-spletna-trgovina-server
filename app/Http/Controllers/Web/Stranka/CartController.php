@@ -38,7 +38,7 @@ class CartController extends Controller
         $cartItems = array();
         $sum = 0;
         foreach($items as $item) {
-            $sum += $item->product->currentPrice()->cena;
+            $sum += $item->product->currentPrice()->cena * $item->kolicina;
             $cartItems[] = [
                 "id_produkt" => $item->id_produkt,
                 "naziv" => $item->product->naziv,
@@ -54,8 +54,8 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $temp = $request->validate([
-            "id_produkt" => "required",
-            "kolicina" => "nullable",
+            "id_produkt" => "required|numeric",
+            "kolicina" => "nullable|numeric",
         ]);
 
         $produkt = Produkt::findOrFail($temp["id_produkt"]);
@@ -97,7 +97,7 @@ class CartController extends Controller
     }
 
     public function removeFromCart(Request $request, $id) {
-        Kosarica::where("id_produkt", $id)->delete();
+        Kosarica::where("id_produkt", htmlspecialchars($id))->delete();
 
         return response("", 204);
     }

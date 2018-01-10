@@ -30,15 +30,15 @@ class UserController extends Controller
         $userId = $request->session()->get("userId");
 
         $user = Uporabnik::find($userId);
-        $user->ime = $data["ime"];
-        $user->priimek = $data["priimek"];
-        $user->email = $data["email"];
-        $user->naslov = $data["naslov"];
-        $user->tel_stevilka = $data["tel_stevilka"];
+        $user->ime = htmlspecialchars($data["ime"]);
+        $user->priimek = htmlspecialchars($data["priimek"]);
+        $user->email = htmlspecialchars($data["email"]);
+        $user->naslov = htmlspecialchars($data["naslov"]);
+        $user->tel_stevilka = htmlspecialchars($data["tel_stevilka"]);
 
         if ($data["geslo"] != null and $data["geslo_staro"] != null and $data["geslo"] == $data["geslo_rep"]) {
-            if (password_verify($data["geslo_staro"], $user->geslo)) {
-                $user->geslo = password_hash($data["geslo"], PASSWORD_BCRYPT);
+            if (password_verify(htmlspecialchars($data["geslo_staro"]), $user->geslo)) {
+                $user->geslo = password_hash(htmlspecialchars($data["geslo"]), PASSWORD_BCRYPT);
             } else {
                 return view("stranka.posodobi_stranka", ["stranka" => Uporabnik::find($userId), "error" => "Nepravilno izpolnjena polja!"]);
             }

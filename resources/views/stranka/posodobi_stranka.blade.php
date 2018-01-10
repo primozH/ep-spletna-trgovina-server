@@ -8,7 +8,7 @@
         @endif
         {{ csrf_field() }}
         Ime:<br>
-        <input type="text" name="ime" required value="{{ $stranka->ime }}"><br>
+        <input type="text" name="ime" required value="{{ $stranka->ime }}" autofocus><br>
         Priimek:<br>
         <input type="text" name="priimek" value="{{ $stranka->priimek }}" required><br>
         E-mail:<br>
@@ -16,7 +16,7 @@
         Naslov:<br>
         <input type="text" name="naslov" value="{{ $stranka->naslov }}" required><br>
         Telefonska številka:<br>
-        <input type="text" name="tel_stevilka" value="{{ $stranka->tel_stevilka }}" required><br>
+        <input type="text" name="tel_stevilka" value="{{ $stranka->tel_stevilka }}" pattern="\d\d\d \d\d\d \d\d\d" required><br>
         Staro geslo:<br>
         <input type="password" name="geslo_staro"><br>
         Geslo:<br>
@@ -29,8 +29,7 @@
         </div>
     </form>
 
-
-    <a href="/izdelki-stranka"><p style="font-size: 20px;position: fixed;bottom: 5;right: 15;color: green; ">Nazaj</p></a>
-
-
+@endsection
+@section("script")
+    <script src="{{ URL::asset("js/profil.js") }}"></script>
 @endsection

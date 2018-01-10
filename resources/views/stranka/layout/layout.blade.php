@@ -14,23 +14,28 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <input type="search" name="search" placeholder="Išči..." />
                 @if(!session()->has("userId"))
-                    <form class="form-inline my-2 my-lg-0">
-                        <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/prijava">Prijava</a>
-                        <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/registracija">Registracija</a>
+                    <div class="navbar-nav">
+                        <a class="btn btn-outline-success" href="/prijava">Prijava</a>
+                        <a class="btn btn-outline-success" href="/registracija">Registracija</a>
+                    </div>
 
-                    </form>
                 @else
-                    <a class="btn btn-outline-success" href="/profil">Profil</a>
-                    <a href="/racuni">Zgodovina nakupov</a>
-                    <a class="btn btn-outline-success" href="/odjava">Odjava</a>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/profil">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/racuni">Zgodovina nakupov</a>
+                        </li>
+                    </ul>
                     <a class="btn btn-outline-danger" id="shoppingCartBtn" href="/kosarica">
                         <i class="fas fa-shopping-cart"></i>
                         <span>Košarica</span>
-                        <div>
-                            <span id="price">0</span><span> €</span>
-                        </div>
+                        <span id="price">0</span><span> €</span>
                     </a>
+                    <a class="btn btn-outline-success" href="/odjava">Odjava</a>
                 @endif
             </div>
         </nav>

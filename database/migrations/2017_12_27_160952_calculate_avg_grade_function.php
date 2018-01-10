@@ -31,6 +31,6 @@ class CalculateAvgGradeFunction extends Migration
      */
     public function down()
     {
-        DB::unprepared("DROP FUNCTION calculate_average_grade");
+        DB::unprepared("DROP FUNCTION IF EXISTS calculate_average_grade");
     }
 }

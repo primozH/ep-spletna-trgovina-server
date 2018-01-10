@@ -18,12 +18,9 @@ class InvoiceController extends Controller
 
         $user = Uporabnik::find($userId);
 
-        $invoices = $user->ordersForCustomer();
-
-        $open = $invoices->where("status", "odprt")->orderBy("datum", "desc")->get();
-        $confirmed = $invoices->where("status", "potrjen")->orderBy("datum", "desc")->get();
-        $cancelled = $invoices->where("status", "storniran")->orderBy("datum", "desc")->get();
-        var_dump($invoices->get());
+        $open = $user->ordersForCustomer()->where("status", "odprt")->orderBy("datum", "desc")->get();
+        $confirmed = $user->ordersForCustomer()->where("status", "potrjen")->orderBy("datum", "desc")->get();
+        $cancelled = $user->ordersForCustomer()->where("status", "storniran")->orderBy("datum", "desc")->get();
 
         return view("stranka.zgodovina", ["odprt" => $open, "potrjen" => $confirmed, "storniran" => $cancelled]);
     }
@@ -64,6 +61,8 @@ class InvoiceController extends Controller
         }
 
         $invoice->invoiceItems()->saveMany($invoiceItems);
+
+
 
         Kosarica::where("id_uporabnik", $user->id_uporabnik)->delete();
 

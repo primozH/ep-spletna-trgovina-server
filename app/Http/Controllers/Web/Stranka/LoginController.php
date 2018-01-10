@@ -42,10 +42,10 @@ class LoginController extends Controller
             "geslo" => "required",
         ]);
 
-        $uporabnik = Uporabnik::where("email", $data["email"])->first();
+        $uporabnik = Uporabnik::where("email", htmlspecialchars($data["email"]))->first();
 
         if ($uporabnik) {
-            if (password_verify($data["geslo"], $uporabnik->geslo)) {
+            if (password_verify(htmlspecialchars($data["geslo"]), $uporabnik->geslo)) {
                 $request->session()->put("userId", $uporabnik->id_uporabnik);
                 return redirect("/");
             }
@@ -59,15 +59,15 @@ class LoginController extends Controller
         $data = $request->validate([
             "ime" => "required",
             "priimek" => "required",
-            "email" => "required",
+            "email" => "required|unique:uporabnik",
             "tel_stevilka" => "nullable",
             "naslov" => "required",
-            "geslo" => "required",
+            "geslo" => "required|size:8",
             "g-recaptcha-response" => "required",
         ]);
 
         if (!$this->verifyCAPTCHA($data["g-recaptcha-response"]))
-            return view("stranka.registracija_stranka", []);
+            return view("stranka.registracija_stranka", ["error" => "Napaka pri captchi. Prosim osveži stran."]);
 
         $user = $this->create($data);
 
@@ -84,19 +84,17 @@ class LoginController extends Controller
 
     protected function verifyCAPTCHA($token) {
         $client = new Client;
-        $response = $client->request("POST", "https://www.google.com/recaptcha/api/siteverify",
-            ["json" => ["secret" => env("CAPTCHA_KEY"),
-                        "response" => $token]]);
+
+        $response = $client->post("https://www.google.com/recaptcha/api/siteverify?secret=" .
+            env("CAPTCHA_KEY") . "&response=" . $token);
 
         if($response->getStatusCode() == 200) {
             $body = $response->getBody();
             $data = json_decode($body);
 
-            var_dump($data);
-            var_dump($token);
-//            if ($data->success) {
-//                return true;
-//            }
+            if ($data->success) {
+                return true;
+            }
         }
         return false;
     }

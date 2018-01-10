@@ -8,9 +8,6 @@
             <h3>Odprta naročila</h3>
             <div class="row">
                 <div class="col-4">
-                    Datum
-                </div>
-                <div class="col-4">
                     Račun
                 </div>
                 <div class="col-4">
@@ -19,13 +16,8 @@
             </div>
 
             @forelse($odprt as $racun)
-                <div class="row">
-                    <div class="col-4"><a href="/racuni/{{ $racun->id_racun }}">
-                        {{ $racun->datum }}
-                        </a>
-                    </div>
-                    <div class="col-4">
-                        <a href="/racuni/{{ $racun->id_racun }}">
+                <div class="row product-item">
+                    <div class="col-4"><a class="btn btn-outline-primary" href="/racuni/{{ $racun->id_racun }}">
                         {{ $racun->id_racun }}
                         </a>
                     </div>
@@ -35,7 +27,6 @@
                 </div>
             @empty
                 <div class="row">
-
                     <div class="col-2 offset-5 alert alert-warning" role="alert">
                         Ni preteklih nakupov!
                     </div>
@@ -58,8 +49,8 @@
             </div>
 
             @forelse($potrjen as $racun)
-                <div class="row">
-                    <div class="col-4"><a href="/racuni/{{ $racun->id_racun }}">
+                <div class="row product-item">
+                    <div class="col-4"><a class="btn btn-outline-success" href="/racuni/{{ $racun->id_racun }}">
                             {{ $racun->datum }}
                         </a>
                     </div>
@@ -97,8 +88,8 @@
             </div>
 
             @forelse($storniran as $racun)
-                <div class="row">
-                    <div class="col-4"><a href="/racuni/{{ $racun->id_racun }}">
+                <div class="row product-item">
+                    <div class="col-4"><a class="btn btn-outline-danger" href="/racuni/{{ $racun->id_racun }}">
                             {{ $racun->datum }}
                         </a>
                     </div>
@@ -121,4 +112,7 @@
             @endforelse
         </div>
     </div>
+@endsection
+@section("script")
+    <script src="{{ URL::asset("js/zgodovina.js") }}"></script>
 @endsection

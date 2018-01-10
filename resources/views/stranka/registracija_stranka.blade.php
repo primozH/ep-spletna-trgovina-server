@@ -42,7 +42,8 @@
                 <label for="tel_stevilka" class="col-12 col-md-4 offset-md-3 control-label">Telefonska številka</label>
                 <div class="col-md-6 offset-md-3">
 
-                    <input id="tel_stevilka" type="text" name="tel_stevilka" value="{{ old('tel_stevilka') }}" class="form-control">
+                    <input id="tel_stevilka" type="text" name="tel_stevilka" value="{{ old('tel_stevilka') }}"
+                           pattern="\d\d\d \d\d\d \d\d\d" class="form-control" placeholder="123 456 789" required>
 
                 </div>
             </div>
@@ -78,6 +79,11 @@
                 Potrebno je rešiti CAPTCHO!
             </div>
         </form>
+        @if (! empty($error))
+            <div class="alert alert-warning">
+                {{ $error }}
+            </div>
+        @endif
     </div>
     @if ($errors->any())
         <div class="alert alert-danger">

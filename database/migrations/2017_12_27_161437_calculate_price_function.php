@@ -31,6 +31,6 @@ class CalculatePriceFunction extends Migration
      */
     public function down()
     {
-        DB::unprepared("DROP FUNCTION calculate_price");
+        DB::unprepared("DROP FUNCTION IF EXISTS calculate_price");
     }
 }
