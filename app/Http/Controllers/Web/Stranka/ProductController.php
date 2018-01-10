@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
 
     public function index() {
-        $products = Produkt::all();
+        $products = Produkt::where("aktiviran", true)->get();
         return view('stranka.index', ["products"=>$products]);
     }
 

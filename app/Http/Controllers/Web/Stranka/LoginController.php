@@ -13,6 +13,8 @@ use App\EmailPotrditev;
 use App\Http\Controllers\Controller;
 use App\Mail\RegistrationConfirmation;
 use App\Uporabnik;
+use App\UporabnikVloga;
+use App\Vloga;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -45,17 +47,26 @@ class LoginController extends Controller
         ]);
 
         $uporabnik = Uporabnik::where("email", htmlspecialchars($data["email"]))
-                    ->where("aktiviran", true)
+                    ->where("potrjen", true)
                     ->first();
+
+        $vloga = Vloga::where("naziv", "stranka")->first();
+        $vloga_uporabnik = UporabnikVloga::where("id_uporabnik", $uporabnik->id_uporabnik)
+                ->where("id_vloga", $vloga->id_vloga)
+                ->first();
+        if (!$vloga_uporabnik)
+        {
+            return view("stranka.prijava_stranka", ["error" => "Napačen email/geslo"]);
+        }
 
         if ($uporabnik) {
             if (password_verify(htmlspecialchars($data["geslo"]), $uporabnik->geslo)) {
                 $request->session()->put("userId", $uporabnik->id_uporabnik);
                 return redirect("/");
             }
-            return view("stranka.prijava_stranka", ["error", "Napačen mail/geslo"]);
+            return view("stranka.prijava_stranka", ["error" => "Napačen email/geslo"]);
         }
-        return view("stranka.prijava_stranka", ["error", "Nepotrjena registracija"]);
+        return view("stranka.prijava_stranka", ["error" => "Nepotrjena registracija!"]);
     }
 
     public function verifyRegister(Request $request)

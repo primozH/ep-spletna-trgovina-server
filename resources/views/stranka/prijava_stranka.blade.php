@@ -2,7 +2,14 @@
 
 
 @section("content")
+    @if (!empty($error))
+        <div class="alert alert-danger">
+            {{ $error }}
+        </div>
+    @endif
 <div class="row">
+
+    <div class="col-6">
     <form action="/prijava" method="post" class="form-horizontal">
         {{ csrf_field() }}
         <div class="form-group">
@@ -31,6 +38,7 @@
             </div>
         </div>
     </form>
+    </div>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -41,5 +49,4 @@
         </div>
     @endif
 </div>
-    <a href="/"><p style="font-size: 20px;position: fixed;bottom: 5;right: 15;color: green; ">Nazaj</p></a>
 @endsection

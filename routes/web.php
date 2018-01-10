@@ -24,6 +24,12 @@ Route::get('/registracija', "LoginController@register")->name("register");
 Route::post("registracija", "LoginController@verifyRegister");
 Route::get("/registracija/potrdi", "LoginController@confirmVerificationCode");
 
+Route::get("/mailable", function() {
+    $user = \App\Uporabnik::find(10);
+
+    Mail::to("primoz.hrovat.96@gmail.com")->send(new \App\Mail\RegistrationConfirmation($user, "1234"));
+});
+
 /* STRANKA */
 Route::middleware("logged")->group(function() {
 
