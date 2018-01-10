@@ -18,9 +18,9 @@
                     </div>
                 </div>
                 @foreach($odprtiRacuni as $racun)
-                    <div class="row">
+                    <div class="row product-item">
                         <div class="col-4">
-                            <a href="/prodaja/racuni/{{ $racun->id_racun }}">
+                            <a class="btn btn-outline-primary" href="/prodaja/racuni/{{ $racun->id_racun }}">
                                 <span>{{ $racun->id_racun }}</span>
                             </a>
                         </div>
@@ -56,9 +56,9 @@
                 </div>
 
                 @foreach($zgodovinaRacuni as $racun)
-                    <div class="row">
+                    <div class="row product-item">
                         <div class="col-3">
-                            <a href="/prodaja/racuni/{{ $racun->id_racun }}"><span>{{ $racun->datum }}</span></a>
+                            <a class="btn btn-outline-primary" href="/prodaja/racuni/{{ $racun->id_racun }}"><span>{{ $racun->datum }}</span></a>
                         </div>
                         <div class="col-3">
                             <span>{{ $racun->id_racun }}</span>

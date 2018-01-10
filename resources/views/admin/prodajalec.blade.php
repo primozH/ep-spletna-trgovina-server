@@ -4,7 +4,7 @@
     @if($prodajalec)
         <h1>{{ $prodajalec->ime }}</h1>
         <div class="row">
-            <div class="col-6 offset-3">
+            <div class="col-6">
                 <form action="/admin/prodajalci/{{ $prodajalec->id_uporabnik }}" method="post">
                     {{ csrf_field() }}
                     Ime:<br>
@@ -30,6 +30,22 @@
                         <button class="btn btn-outline-success" type="submit" >Posodobi</button>
                     </div>
                 </form>
+            </div>
+            <div class="col-5">
+                <h3>Pretekla naročila</h3>
+            @foreach($prodajalec->ordersForSalesman()->get() as $orders)
+                    <div class="row product-item">
+                        <div class="col-4">
+                            {{ $orders->id_racun }}
+                        </div>
+                        <div class="col-4">
+                            {{ $orders->datum }}
+                        </div>
+                        <div class="col-4">
+                            {{ $orders->znesek }}
+                        </div>
+                    </div>
+                    @endforeach
             </div>
         </div>
 

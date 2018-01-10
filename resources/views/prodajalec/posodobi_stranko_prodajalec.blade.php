@@ -9,14 +9,12 @@
             <input type="text" name="ime" value="{{ $stranka->ime }}" required><br>
             Priimek:<br>
             <input type="text" name="priimek" value="{{ $stranka->priimek }}" required><br>
-            Uporabniško ime:
-            <input type="text" name="uporabnisko_ime" value="{{ $stranka->uporabnisko_ime}}" required>
             E-mail:<br>
             <input type="email" name="email" value="{{ $stranka->email }}" required><br>
             Naslov:<br>
             <input type="text" name="naslov" value="{{ $stranka->naslov }}" required><br>
             Telefonska številka:<br>
-            <input type="text" name="tel_stevilka" value="{{ $stranka->tel_stevilka }}"><br>
+            <input type="text" name="tel_stevilka" value="{{ $stranka->tel_stevilka }}" required><br>
             Novo geslo:<br>
             <input type="password" name="geslo" value=""><br>
             Ponovno vpiši geslo:<br>
@@ -34,8 +32,6 @@
             <input type="text" name="ime" required><br>
             Priimek:<br>
             <input type="text" name="priimek" required><br>
-            Uporabniško ime:
-            <input type="text" name="uporabnisko_ime" required>
             E-mail:<br>
             <input type="email" name="email" required><br>
             Naslov:<br>
@@ -53,6 +49,10 @@
         </form>
 
     @endif
-
+    @if(! empty($error))
+    <div class="alert alert-danger" role="alert">
+        {{ $error }}
+    </div>
+    @endif
 
 @endsection

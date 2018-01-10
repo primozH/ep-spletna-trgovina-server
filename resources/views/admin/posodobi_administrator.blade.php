@@ -6,11 +6,9 @@
             <form action="/admin/profil" method="post">
                 {{ csrf_field() }}
                 Ime:<br>
-                <input type="text" name="ime"><br>
+                <input type="text" name="ime" value="{{ $admin->ime }}" required autofocus><br>
                 Priimek:<br>
-                <input type="text" name="priimek"><br>
-                E-mail:<br>
-                <input type="text" name="email"><br>
+                <input type="text" name="priimek" value="{{ $admin->priimek }}" required><br>
                 Geslo:<br>
                 <input type="password" name="geslo"><br>
                 Ponovi geslo:<br>

@@ -3,9 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Uporabnik extends Model implements JWTSubject
+class Uporabnik extends Model
 {
     protected $table = "uporabnik";
 
@@ -41,16 +40,6 @@ class Uporabnik extends Model implements JWTSubject
     public function cartItems()
     {
         return $this->hasMany("App\Kosarica", "id_uporabnik", "id_uporabnik");
-    }
-
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    public function getJWTCustomClaims()
-    {
-        return [];
     }
 
 }

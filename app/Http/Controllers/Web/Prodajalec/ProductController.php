@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Produkt;
 use App\Slika;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -41,18 +42,18 @@ class ProductController extends Controller
         $data = $request->validate([
             "naziv" => "required",
             "opis" => "required",
-            "cena" => "required|numeric|digits_between:1,8",
+            "cena" => "required|numeric",
             "veljavno_do" => "required|date"
         ]);
 
-        $product->naziv = $data["naziv"];
-        $product->opis = $data["opis"];
+        $product->naziv = htmlspecialchars($data["naziv"]);
+        $product->opis = htmlspecialchars($data["opis"]);
         $product->save();
 
         $price = new Cenik;
 
-        $price->cena = $data["cena"];
-        $price->veljavno_do = $data["veljavno_do"];
+        $price->cena = htmlspecialchars($data["cena"]);
+        $price->veljavno_do = htmlspecialchars($data["veljavno_do"]);
 
         $product->prices()->save($price);
 
@@ -69,19 +70,21 @@ class ProductController extends Controller
             $price->save();
 
             $new_price= new Cenik;
-            $new_price->veljavno_do = $request->input("veljavno_do");
-            $new_price->cena = (float) $request->input("cena");
+            $new_price->veljavno_do = htmlspecialchars($request->input("veljavno_do"));
+            $new_price->cena = (float)htmlspecialchars($request->input("cena"));
 
             $product->prices()->save($new_price);
         }
 
         if ($request->has("naziv")) {
-            $product->naziv = $request->input("naziv");
+            $product->naziv = htmlspecialchars($request->input("naziv"));
         }
 
         if ($request->has("opis")) {
-            $product->opis = $request->input("opis");
+            $product->opis = htmlspecialchars($request->input("opis"));
         }
+
+        $product->aktiviran = htmlspecialchars($request->input("aktiviran"));
 
         $product->save();
 
@@ -90,15 +93,26 @@ class ProductController extends Controller
 
     public function uploadImage(Request $request, $id)
     {
-        $product = Produkt::find($id);
 
-        $path = $request->file("slika")->storeAs("images", $product->naziv . date("Y-m-d"), "public");
+        $product = Produkt::find($id);
+        $data = $request->validate([
+            "slika" => "image|max:2000"
+        ]);
+
+        $file_name = $request->file("slika")->getClientOriginalName();
+        $file_ext = $request->file("slika")->getClientOriginalExtension();
+        $path = "public/images/" . $file_name;
+
+        $path = $request->file('slika')->storeAs(
+            'images/', $file_name, 'public');
 
         $image = new Slika;
-        $image->pot = $path;
+        $image->pot = Storage::url($path);
         $image->alias = $product->naziv . date("Y-m-d");
-        $image->zap_st = $product->images()->count + 1;
+        $image->zap_st = $product->images()->count() + 1;
 
         $product->images()->save($image);
+
+        return response()->redirectTo("/prodaja/izdelki");
     }
 }

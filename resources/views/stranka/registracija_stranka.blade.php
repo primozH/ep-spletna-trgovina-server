@@ -62,13 +62,20 @@
 
                 </div>
             </div>
+            <div class="form-group">
+                <div class="col-12 col-md-6 offset-md-4" id="captcha"></div>
+            </div>
 
             <div class="form-group">
 
                 <div class="col-12 col-md-6 offset-md-3">
 
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/izdelki-stranka">Registracija</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="submit-btn">Registracija</button>
                 </div>
+            </div>
+
+            <div class="alert alert-danger" id="no-captcha" >
+                Potrebno je rešiti CAPTCHO!
             </div>
         </form>
     </div>
@@ -84,4 +91,10 @@
 </div>
 
 
+@endsection
+@section("script")
+    <script src="{{ URL::asset("js/registracija.js") }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=sl"
+            async defer>
+    </script>
 @endsection

@@ -35,7 +35,7 @@ class LoginController extends Controller
             $uporabnikVloga = $uporabnik->roles()->where("id_vloga", $vloga->id_vloga)->first();
             if ($uporabnikVloga) {
 
-                if (password_verify($data["geslo"], $uporabnik->geslo)) {
+                if (password_verify(htmlspecialchars($data["geslo"]), $uporabnik->geslo)) {
                     $request->session()->put("adminId", $uporabnik->id_uporabnik);
                     return redirect("/admin");
                 }

@@ -16,8 +16,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li>
-                        <a href="/admin/profil">Profil</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Prodajalci</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/profil">Profil</a>
                     </li>
                 </ul>
                 <a class="btn btn-outline-success" href="/admin/odjava">Odjava</a>

@@ -14,6 +14,7 @@ use App\Uporabnik;
 use App\UporabnikVloga;
 use App\Vloga;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 
 class CustomerController extends Controller
 {
@@ -45,9 +46,8 @@ class CustomerController extends Controller
         $data = $request->validate([
             "ime" => "required",
             "priimek" => "required",
-            "uporabnisko_ime" => "required|unique:uporabnik",
-            "email" => "required",
-            "tel_stevilka" => "nullable",
+            "email" => "required|unique: uporabnik",
+            "tel_stevilka" => "required",
             "naslov" => "required",
             "geslo" => "required"
         ]);
@@ -67,17 +67,30 @@ class CustomerController extends Controller
 
         $user = Uporabnik::find($id);
 
-        $user->ime = $request->input("ime");
-        $user->priimek = $request->input("priimek");
-        $user->uporabnisko_ime = $request->input("uporabnisko_ime");
-        $user->email = $request->input("email");
-        $user->tel_stevilka = $request->input("tel_stevilka");
-        $user->naslov = $request->input("naslov");
+        $data = $request->validate([
+            "ime" => "required",
+            "priimek" => "required",
+            "email" => "required",
+            "tel_stevilka" => "required",
+            "naslov" => "required",
+            "geslo" => "nullable"
+        ]);
+
+        $user->ime = $data["ime"];
+        $user->priimek = $data["priimek"];
+        $user->email = $data["email"];
+        $user->tel_stevilka = $data["tel_stevilka"];
+        $user->naslov = $data["naslov"];
 
         if ($request->has("geslo"))
-            $user->geslo = password_hash($request->input("geslo"), PASSWORD_BCRYPT);
+            $user->geslo = password_hash($data["geslo"], PASSWORD_BCRYPT);
 
-        $user->save();
+        try {
+
+            $user->save();
+        } catch (Exception $e) {
+            return view("prodajalec.posodobi_stranko_prodajalec", ["error" => "Napaka pri posodabljanju"]);
+        }
 
         return response()->redirectTo("/prodaja/stranke");
     }

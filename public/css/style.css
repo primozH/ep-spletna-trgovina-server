@@ -7,5 +7,13 @@
     border-radius: 10px;
     background-color: #d3ffcc;
     margin-top: 5px;
+}
 
+#submit-btn, #no-captcha {
+    display: none;
+}
+
+.product-item {
+    border: 2px solid #636b6f;
+    border-radius: 5px;
 }

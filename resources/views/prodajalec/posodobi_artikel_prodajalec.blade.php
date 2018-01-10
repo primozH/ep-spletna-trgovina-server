@@ -12,6 +12,13 @@
             <textarea name="opis" cols="70", rows="10">{{ $izdelek->opis }}</textarea><br>
 
             <div class="form-group">
+                <select name="aktiviran">
+                    <option value="0" @if(!$izdelek->aktiviran) selected @endif >Neaktiven</option>
+                    <option value="1" @if( $izdelek->aktiviran) selected @endif >Aktiven</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="cena">Cena</label>
                 <input type="text" value="{{ $izdelek->currentPrice()->cena }}" name="cena"/>
             </div>
@@ -26,7 +33,7 @@
         </form>
 
         <form action="/prodaja/izdelki/{{ $izdelek->id_produkt }}/slike" method="post" enctype="multipart/form-data">
-
+            {{ csrf_field() }}
             Slike:
             <input type="file" name="slika" accept="image/*"/>
             <button type="submit">Naloži</button>
@@ -36,10 +43,18 @@
         <h1>Dodaj izdelek</h1>
 
         <form action="/prodaja/izdelki/dodaj" method="post">
+            {{ csrf_field() }}
             Naziv:<br>
-            <input type="text" name="naziv" value="" required><br>
+            <input type="text" name="naziv" value="" required autofocus><br>
             Opis:<br>
             <textarea name="opis" cols="70", rows="10" required></textarea><br>
+
+            <div class="form-group">
+                <select name="aktiviran">
+                    <option value="0" >Neaktiven</option>
+                    <option value="1" selected >Aktiven</option>
+                </select>
+            </div>
 
             <div class="form-group">
                 <label for="cena">Cena</label>

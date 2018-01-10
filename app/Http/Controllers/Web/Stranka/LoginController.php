@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Web\Stranka;
 use App\EmailPotrditev;
 use App\Http\Controllers\Controller;
 use App\Uporabnik;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
@@ -61,8 +62,12 @@ class LoginController extends Controller
             "email" => "required",
             "tel_stevilka" => "nullable",
             "naslov" => "required",
-            "geslo" => "required"
+            "geslo" => "required",
+            "g-recaptcha-response" => "required",
         ]);
+
+        if (!$this->verifyCAPTCHA($data["g-recaptcha-response"]))
+            return view("stranka.registracija_stranka", []);
 
         $user = $this->create($data);
 
@@ -75,6 +80,25 @@ class LoginController extends Controller
 
         return view("stranka.status_registracija", ["uspesno" => true, "sporocilo" => "Hvala za registracijo!"
             ." Prosimo preverite e-poštni nabiralnik, da zaključite postopek registracije."]);
+    }
+
+    protected function verifyCAPTCHA($token) {
+        $client = new Client;
+        $response = $client->request("POST", "https://www.google.com/recaptcha/api/siteverify",
+            ["json" => ["secret" => env("CAPTCHA_KEY"),
+                        "response" => $token]]);
+
+        if($response->getStatusCode() == 200) {
+            $body = $response->getBody();
+            $data = json_decode($body);
+
+            var_dump($data);
+            var_dump($token);
+//            if ($data->success) {
+//                return true;
+//            }
+        }
+        return false;
     }
 
     protected function create(array $data)

@@ -14,11 +14,14 @@
             <div class="col-2">
                 Cena €
             </div>
+            <div class="col-2">
+                Aktiven
+            </div>
         </div>
         @foreach ($izdelki as $izdelek)
             <div class="row">
                 <div class="col-2">
-                    <a href="/prodaja/izdelki/{{ $izdelek->id_produkt }}">
+                    <a class="btn btn-outline-success" href="/prodaja/izdelki/{{ $izdelek->id_produkt }}">
                         {{ $izdelek->id_produkt }}
                     </a>
                 </div>
@@ -27,6 +30,9 @@
                 </div>
                 <div class="col-2">
                     {{ $izdelek->currentPrice()->cena }}
+                </div>
+                <div class="col-2">
+                    {{ $izdelek->aktiviran ? "Da" : "Ne" }}
                 </div>
             </div>
         @endforeach

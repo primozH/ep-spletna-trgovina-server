@@ -20,9 +20,10 @@ class InvoiceController extends Controller
 
         $invoices = $user->ordersForCustomer();
 
-        $open = $invoices->where("status", "odprt")->get();
-        $confirmed = $invoices->where("status", "potrjen")->get();
-        $cancelled = $invoices->where("status", "storniran")->get();
+        $open = $invoices->where("status", "odprt")->orderBy("datum", "desc")->get();
+        $confirmed = $invoices->where("status", "potrjen")->orderBy("datum", "desc")->get();
+        $cancelled = $invoices->where("status", "storniran")->orderBy("datum", "desc")->get();
+        var_dump($invoices->get());
 
         return view("stranka.zgodovina", ["odprt" => $open, "potrjen" => $confirmed, "storniran" => $cancelled]);
     }

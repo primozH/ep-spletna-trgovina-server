@@ -54,10 +54,10 @@ class SalesController extends Controller
     {
         $salesman = new Uporabnik;
 
-        $salesman->ime = $request->input("ime");
-        $salesman->priimek = $request->input("priimek");
-        $salesman->email = $request->input("email");
-        $salesman->geslo = password_hash($request->input("geslo"), PASSWORD_BCRYPT);
+        $salesman->ime = htmlspecialchars($request->input("ime"));
+        $salesman->priimek = htmlspecialchars($request->input("priimek"));
+        $salesman->email = htmlspecialchars($request->input("email"));
+        $salesman->geslo = password_hash(htmlspecialchars($request->input("geslo")), PASSWORD_BCRYPT);
 
         $salesman->save();
 
@@ -78,13 +78,13 @@ class SalesController extends Controller
             "aktiviran" => "required",
         ]);
 
-        $salesman->ime = $data["ime"];
-        $salesman->priimek = $data["priimek"];
-        $salesman->email = $data["email"];
-        $salesman->aktiviran = $data["aktiviran"];
+        $salesman->ime = htmlspecialchars($data["ime"]);
+        $salesman->priimek = htmlspecialchars($data["priimek"]);
+        $salesman->email = htmlspecialchars($data["email"]);
+        $salesman->aktiviran = htmlspecialchars($data["aktiviran"]);
 
         if ($data["geslo"] != null) {
-            $salesman->geslo = password_hash($data["geslo"], PASSWORD_BCRYPT);
+            $salesman->geslo = password_hash(htmlspecialchars($data["geslo"]), PASSWORD_BCRYPT);
         }
 
         $salesman->save();

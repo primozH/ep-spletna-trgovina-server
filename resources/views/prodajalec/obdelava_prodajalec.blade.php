@@ -30,7 +30,7 @@
                 </div>
                 <div>
                     <span>Prodajalec</span>
-                    <input type="number" value="{{ $racun->id_prodajalec }}"/>
+                    <input type="number" name="id_prodajalec" value="{{ $racun->id_prodajalec ? $racun->id_prodajalec : session()->get("salesId") }}"/>
                 </div>
                 <div>
                     <span>Stranka</span>

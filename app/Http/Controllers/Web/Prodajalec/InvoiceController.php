@@ -18,8 +18,8 @@ class InvoiceController extends Controller
 {
 
     public function index(Request $request) {
-        $openInvoices = Racun::where("status", "odprt")->get();
-        $otherInvoices = Racun::where("status", "<>", "odprt")->get();
+        $openInvoices = Racun::where("status", "odprt")->orderBy("datum", "desc")->get();
+        $otherInvoices = Racun::where("status", "<>", "odprt")->orderBy("datum", "desc")->get();
 
         return view("prodajalec.index_prodajalec",
             ["odprtiRacuni" => $openInvoices,
@@ -37,12 +37,12 @@ class InvoiceController extends Controller
     {
         $invoice = Racun::find($id);
 
-        $invoice->status = $request->input("status");
+        $invoice->status = htmlspecialchars($request->input("status"));
         if (!$invoice->datum)
             $invoice->datum = date("Y-m-d");
 
 
-        $invoice->id_prodajalec = $request->input("prodajalec");
+        $invoice->id_prodajalec = htmlspecialchars($request->input("id_prodajalec"));
 
         $invoice->save();
 

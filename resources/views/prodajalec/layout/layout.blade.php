@@ -16,14 +16,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a href="/prodaja/izdelki">Izdelki</a>
+                    <li>
+                        <a class="nav-link" href="/prodaja">Računi</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/prodaja/stranke">Stranke</a>
+                        <a class="nav-link" href="/prodaja/izdelki">Izdelki</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/prodaja/stranke">Stranke</a>
                     </li>
                     <li>
-                        <a href="/prodaja/profil">Profil</a>
+                        <a class="nav-link" href="/prodaja/profil">Profil</a>
                     </li>
                 </ul>
                 <a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="/prodaja/odjava">Odjava</a>

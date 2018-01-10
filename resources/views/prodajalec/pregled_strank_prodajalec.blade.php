@@ -4,38 +4,44 @@
 @section("content")
     <div class="container-fluid">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 <h3>Stranke</h3>
 
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-2">
                         <span>Id</span>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <span>Priimek</span>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <span>Ime</span>
                     </div>
                     <div class="col-3">
                         <span>Email</span>
                     </div>
+                    <div class="col-3">
+                        <span>Telefonska št.</span>
+                    </div>
                 </div>
                 @foreach($stranke as $stranka)
                     <div class="row">
-                        <div class="col-3">
-                            <a href="/prodaja/stranke/{{ $stranka->id_uporabnik }}">
+                        <div class="col-2">
+                            <a class="btn btn-outline-warning" href="/prodaja/stranke/{{ $stranka->id_uporabnik }}">
                                 <span>{{ $stranka->id_uporabnik }}</span>
                             </a>
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
                             <span>{{ $stranka->priimek }}</span>
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
                             <span>{{ $stranka->ime }}</span>
                         </div>
                         <div class="col-3">
                             <span>{{ $stranka->email }}</span>
+                        </div>
+                        <div class="col-3">
+                            <span>{{ $stranka->tel_stevilka }}</span>
                         </div>
                     </div>
                 @endforeach

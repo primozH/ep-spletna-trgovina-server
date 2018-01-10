@@ -16,9 +16,9 @@
                     </div>
             </div>
             @foreach($prodajalci as $prodajalec)
-                <div class="row">
+                <div class="row product-item">
                     <div class="col-4">
-                        <a href="/admin/prodajalci/{{ $prodajalec->id_uporabnik }}">
+                        <a class="btn btn-outline-success" href="/admin/prodajalci/{{ $prodajalec->id_uporabnik }}">
                             {{ $prodajalec->ime }}
                         </a>
                     </div>
@@ -42,14 +42,17 @@
                 </div>
             </div>
             @foreach($neaktivni as $prodajalec)
-                <div class="row">
+                <div class="row product-item">
                     <div class="col-4">
-                        <a href="/admin/prodajalci/{{ $prodajalec->id_uporabnik }}">
+                        <a class="btn btn-outline-danger" href="/admin/prodajalci/{{ $prodajalec->id_uporabnik }}">
                             {{ $prodajalec->ime }}
                         </a>
                     </div>
                     <div class="col-4">
                         {{ $prodajalec->priimek }}
+                    </div>
+                    <div class="col-4">
+                        {{ $prodajalec->ordersForSalesman()->count() }}
                     </div>
                 </div>
             @endforeach
