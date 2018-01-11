@@ -18,6 +18,7 @@ Route::middleware("salesLogged")->group(function() {
     Route::post("/izdelki/dodaj", "ProductController@createProduct");
     Route::post("/izdelki/{id}", "ProductController@updateProduct");
     Route::post("/izdelki/{id}/slike", "ProductController@uploadImage");
+    Route::post("/slike/{id}", "ProductController@deleteImage");
 
 
     Route::get("/stranke", "CustomerController@showCustomers");

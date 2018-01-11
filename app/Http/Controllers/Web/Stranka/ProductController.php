@@ -19,7 +19,7 @@ class ProductController extends Controller
     }
 
     public function productDetails($izdelekId) {
-        $product = Produkt::find(htmlspecialchars($izdelekId));
+        $product = Produkt::find(htmlspecialchars($izdelekId))->where("aktiviran", true)->first();
 
         return view('stranka.produkt_podrobno_stranka', ["product" => $product]);
     }

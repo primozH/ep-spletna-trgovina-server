@@ -93,7 +93,7 @@ class LoginController extends Controller
 
         $email_token->save();
 
-        Mail::to("primoz.hrovat.96@gmail.com")->send(new RegistrationConfirmation($user, $verification_code));
+        Mail::to($user->email)->send(new RegistrationConfirmation($user, $verification_code));
 
         return view("stranka.status_registracija", ["uspesno" => true, "sporocilo" => "Hvala za registracijo!"
             ." Prosimo preverite e-poštni nabiralnik, da zaključite postopek registracije."]);

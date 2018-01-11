@@ -115,4 +115,12 @@ class ProductController extends Controller
 
         return response()->redirectTo("/prodaja/izdelki");
     }
+
+    public function deleteImage(Request $request, $id)
+    {
+        $image = Slika::where("id_slike", htmlspecialchars($id))->delete();
+
+        return back();
+
+    }
 }

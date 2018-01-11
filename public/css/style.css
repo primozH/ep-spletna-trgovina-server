@@ -17,3 +17,7 @@
     border: 2px solid #636b6f;
     border-radius: 5px;
 }
+
+.list-product-image {
+    max-width: 200px;
+}
