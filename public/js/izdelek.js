@@ -25,9 +25,21 @@ $(document).ready(function() {
                 sum = 0;
                 response.items.forEach(function (element) {
                     sum += parseInt(element.cena) * parseInt(element.kolicina);
-                })
+                });
                 $("#price").text(sum);
             }
         })
     });
+
+    // $(".grade-btn").click(function(event) {
+    //     var id = $(this).attr("id");
+    //     id = parseInt(id);
+    //     var ocena = $("#ocena").val();
+    //
+    //     $.post("/ocena/" + id, {ocena: ocena}, function(response, status) {
+    //         if (status === "success") {
+    //             console.log(response);
+    //         }
+    //     })
+    // });
 });

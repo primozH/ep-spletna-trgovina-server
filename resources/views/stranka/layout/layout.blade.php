@@ -14,7 +14,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <input type="search" name="search" placeholder="Išči..." />
+                <form action="/izdelki" class="form-inline">
+                    <input type="search" name="search" placeholder="Išči..." />
+                    <button type="submit" class="btn btn-default">Išči</button>
+                </form>
                 @if(!session()->has("userId"))
                     <div class="navbar-nav">
                         <a class="btn btn-outline-success" href="/prijava">Prijava</a>

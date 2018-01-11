@@ -21,37 +21,43 @@ class UporabnikTableSeeder extends Seeder
                 "ime" => "Marko",
                 "priimek" => "Zajc",
                 "email" => "admin@etrgovina.si",
-                "geslo" => "admin"
+                "geslo" => "admin",
+                "potrjen" => true,
             ],
             [
                 "ime" => "Miha",
                 "priimek" => "Mazovec",
                 "email" => "miha.mazovec@gmail.com",
-                "geslo" => "miham"
+                "geslo" => "miham",
+                "potrjen" => true,
             ],
             [
                 "ime" => "Primož",
                 "priimek" => "Hrovat",
                 "email" => "primoz.hrovat.96@gmail.com",
-                "geslo" => "primoz"
+                "geslo" => "primoz",
+                "potrjen" => true,
             ],
             [
                 "ime" => "Janez",
                 "priimek" => "The Man",
                 "email" => "janez@admin.si",
                 "geslo" => "1234",
+                "potrjen" => true,
             ],
             [
                 "ime" => "Marko",
                 "priimek" => "Skače",
                 "email" => "marko.skace@trata.si",
                 "geslo" => "1234",
+                "potrjen" => true,
             ],
             [
                 "ime" => "Matija",
                 "priimek" => "Majer",
                 "email" => "matija.majer@dobrojutro.si",
                 "geslo" => "1234",
+                "potrjen" => true,
             ],
             [
                 "ime" => "Janez",
@@ -59,7 +65,8 @@ class UporabnikTableSeeder extends Seeder
                 "email" => "janez@novak.si",
                 "geslo" => "1234",
                 "naslov" => "Borovnica 12",
-                "tel_stevilka" => "041999999"
+                "tel_stevilka" => "041999999",
+                "potrjen" => true,
             ],
             [
                 "ime" => "Krištof",
@@ -67,7 +74,8 @@ class UporabnikTableSeeder extends Seeder
                 "email" => "kristof@majka.si",
                 "geslo" => "54621",
                 "naslov" => "Maribor 12",
-                "tel_stevilka" => "051555555"
+                "tel_stevilka" => "051555555",
+                "potrjen" => true,
             ],
             [
                 "ime" => "Matija",
@@ -75,7 +83,8 @@ class UporabnikTableSeeder extends Seeder
                 "email" => "matija@matija.si",
                 "geslo" => "12345",
                 "naslov" => "Koroška Bela 12",
-                "tel_stevilka" => "069000000"
+                "tel_stevilka" => "069000000",
+                "potrjen" => true,
             ]
         ];
 
@@ -86,6 +95,7 @@ class UporabnikTableSeeder extends Seeder
             $account->priimek = $item["priimek"];
             $account->email = $item["email"];
             $account->geslo = password_hash($item["geslo"], PASSWORD_BCRYPT);
+            $account->potrjen = $item["potrjen"];
             if (array_key_exists("naslov", $item))
             {
                 $account->naslov = $item["naslov"];

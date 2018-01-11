@@ -13,6 +13,7 @@
 
 Route::get('/', "ProductController@index");
 Route::get("/izdelki/{izdelekId}", "ProductController@productDetails");
+Route::get("/izdelki", "ProductController@search");
 
 /* PRIJAVA */
 Route::get('/prijava', "LoginController@login")->name("login");
@@ -24,11 +25,11 @@ Route::get('/registracija', "LoginController@register")->name("register");
 Route::post("registracija", "LoginController@verifyRegister");
 Route::get("/registracija/potrdi", "LoginController@confirmVerificationCode");
 
-Route::get("/mailable", function() {
-    $user = \App\Uporabnik::find(10);
-
-    Mail::to("primoz.hrovat.96@gmail.com")->send(new \App\Mail\RegistrationConfirmation($user, "1234"));
-});
+//Route::get("/mailable", function() {
+//    $user = \App\Uporabnik::find(10);
+//
+//    Mail::to("primoz.hrovat.96@gmail.com")->send(new \App\Mail\RegistrationConfirmation($user, "1234"));
+//});
 
 /* STRANKA */
 Route::middleware("logged")->group(function() {
@@ -38,6 +39,8 @@ Route::middleware("logged")->group(function() {
     Route::get('/racuni', "InvoiceController@listInvoices");
     Route::get('/racuni/{racunId}', "InvoiceController@invoiceDetail");
     Route::post('/racuni', "InvoiceController@createInvoice");
+
+    Route::post("/ocena/{izdelekId}", "ProductController@gradeProduct");
 
     Route::get("/kosarica", "CartController@showCart");
     Route::post("/kosarica", "CartController@addToCart");

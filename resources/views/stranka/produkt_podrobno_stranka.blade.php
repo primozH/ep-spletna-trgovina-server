@@ -44,6 +44,25 @@
                 <p>{{ $product->povprecna_ocena }}</p>
             </span>
         </div>
+        @if(session()->has("userId") and empty($grade))
+        <div class="col-4 col-md-3">
+            <form action="/ocena/{{ $product->id_produkt }}" method="post">
+                {{ csrf_field() }}
+            <div class="input-group">
+                <select class="custom-select" id="ocena" name="ocena">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary grade-btn" type="submit">Oceni!</button>
+                </div>
+            </div>
+            </form>
+        </div>
+        @endif
     </div>
 
 

@@ -21,8 +21,9 @@ class CreateProduktTable extends Migration
             $table->decimal("povprecna_ocena", 3, 1)->default(0);
             $table->softDeletes();
             $table->timestamps();
-
         });
+
+        DB::statement("ALTER TABLE produkt ADD FULLTEXT search_index(naziv)");
     }
 
     /**
