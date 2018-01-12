@@ -65,8 +65,6 @@ PB račun za trgovino
     web_shop_api
     web_shop
 
-    Pravice:
-
 
 DODATNI KORAKI ZA NAMESTITEV APLIKACIJE
 1. Ustvarjanje baze in uporabnika (datoteka)
@@ -75,6 +73,10 @@ DODATNI KORAKI ZA NAMESTITEV APLIKACIJE
     php artisan key:generate
     php artisan storage:link
     php artisan migrate:fresh --seed
+4. Namestitev certifikatov CA agencije, prodajalcev, admina v brskalnik
+
+
+NAMESTITEV ANDROID APLIKACIJE
 
 
 
