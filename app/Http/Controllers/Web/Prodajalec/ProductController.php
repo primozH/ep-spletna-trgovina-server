@@ -43,11 +43,13 @@ class ProductController extends Controller
             "naziv" => "required",
             "opis" => "required",
             "cena" => "required|numeric",
+            "aktiviran" => "required",
             "veljavno_do" => "required|date"
         ]);
 
         $product->naziv = htmlspecialchars($data["naziv"]);
         $product->opis = htmlspecialchars($data["opis"]);
+        $product->aktiviran = htmlspecialchars($data["aktiviran"]);
         $product->save();
 
         $price = new Cenik;
@@ -96,22 +98,27 @@ class ProductController extends Controller
 
         $product = Produkt::find($id);
         $data = $request->validate([
-            "slika" => "image|max:2000"
+            "slike.*" => "image|max:2000"
         ]);
+        $count = count($request->input("slike"));
 
-        $file_name = $request->file("slika")->getClientOriginalName();
-        $file_ext = $request->file("slika")->getClientOriginalExtension();
-        $path = "public/images/" . $file_name;
+        foreach ($data["slike"] as $item) {
+            $file_name = $item->getClientOriginalName();
+            $file_ext = $item->getClientOriginalExtension();
+            $path = "public/images/" . $file_name;
+            $path = $item->storeAs(
+                'images/', $file_name, 'public');
 
-        $path = $request->file('slika')->storeAs(
-            'images/', $file_name, 'public');
+            $image = new Slika;
+            $image->pot = Storage::url($path);
+            $image->alias = $product->naziv . date("Y-m-d");
+            $image->zap_st = $product->images()->count() + 1;
+            $product->images()->save($image);
+        }
 
-        $image = new Slika;
-        $image->pot = Storage::url($path);
-        $image->alias = $product->naziv . date("Y-m-d");
-        $image->zap_st = $product->images()->count() + 1;
 
-        $product->images()->save($image);
+
+
 
         return response()->redirectTo("/prodaja/izdelki");
     }

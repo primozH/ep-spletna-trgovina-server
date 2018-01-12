@@ -16,7 +16,7 @@
         Naslov:<br>
         <input type="text" name="naslov" value="{{ $stranka->naslov }}" required><br>
         Telefonska številka:<br>
-        <input type="text" name="tel_stevilka" value="{{ $stranka->tel_stevilka }}" pattern="\d\d\d \d\d\d \d\d\d" required><br>
+        <input type="text" name="tel_stevilka" value="{{ $stranka->tel_stevilka }}" pattern="\d\d\d \d\d\d \d\d\d" placeholder="123 456 789" required><br>
         Staro geslo:<br>
         <input type="password" name="geslo_staro"><br>
         Geslo:<br>

@@ -56,7 +56,7 @@ class InvoiceController extends Controller
         $invoice_new = new Racun;
 
         $invoice_new->datum = date("Y-m-d");
-        $invoice_new->status = "potrjen";
+        $invoice_new->status = "zaključen";
         $invoice_new->znesek = -($invoice->znesek);
         $invoice_new->storniran_racun = $invoice->id_racun;
         $invoice_new->id_stranka = $invoice->id_stranka;

@@ -21,9 +21,15 @@
         @foreach ($izdelki as $izdelek)
             <div class="row">
                 <div class="col-2">
+                    @if($izdelek->aktiviran)
                     <a class="btn btn-outline-success" href="/prodaja/izdelki/{{ $izdelek->id_produkt }}">
                         {{ $izdelek->id_produkt }}
                     </a>
+                    @else
+                    <a class="btn btn-outline-danger" href="/prodaja/izdelki/{{ $izdelek->id_produkt }}">
+                        {{ $izdelek->id_produkt }}
+                    </a>
+                    @endif
                 </div>
                 <div class="col-2">
                     {{ $izdelek->naziv }}

@@ -6,7 +6,7 @@
 
             @if (!empty($uspesno))
                 <div class="alert alert-success" role="alert">
-                    {{ $sporocilo }} <a href="/">Na prvo stran</a>
+                    {{ $uspesno }} <a href="/">Na prvo stran</a>
                 </div>
             @elseif (!empty($error))
                 <div class="alert alert-danger" role="alert">

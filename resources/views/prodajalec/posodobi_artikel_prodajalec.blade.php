@@ -37,8 +37,8 @@
 
                 <form action="/prodaja/izdelki/{{ $izdelek->id_produkt }}/slike" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <label for="slika">Dodaj sliko: </label>
-                    <input type="file" name="slika" accept="image/*"/>
+                    <label for="slika">Dodaj slike: </label>
+                    <input type="file" name="slike[]" accept="image/*" multiple/>
                     <button type="submit" class="btn btn-success">Naloži</button>
                 </form>
 

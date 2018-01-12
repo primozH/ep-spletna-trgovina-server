@@ -49,6 +49,10 @@ class LoginController extends Controller
         $uporabnik = Uporabnik::where("email", htmlspecialchars($data["email"]))
                     ->where("potrjen", true)
                     ->first();
+        if (!$uporabnik)
+        {
+            return view("stranka.prijava_stranka", ["error" => "Napačen email/geslo"]);
+        }
 
         $vloga = Vloga::where("naziv", "stranka")->first();
         $vloga_uporabnik = UporabnikVloga::where("id_uporabnik", $uporabnik->id_uporabnik)
@@ -93,9 +97,9 @@ class LoginController extends Controller
 
         $email_token->save();
 
-        Mail::to($user->email)->send(new RegistrationConfirmation($user, $verification_code));
+        Mail::to("primoz.hrovat.96@gmail.com")->send(new RegistrationConfirmation($user, $verification_code));
 
-        return view("stranka.status_registracija", ["uspesno" => true, "sporocilo" => "Hvala za registracijo!"
+        return view("stranka.status_registracija", ["uspesno" => "Hvala za registracijo!"
             ." Prosimo preverite e-poštni nabiralnik, da zaključite postopek registracije."]);
     }
 
@@ -115,7 +119,9 @@ class LoginController extends Controller
             $usr = Uporabnik::find($user);
             $usr->potrjen = true;
 
+            $usr->save();
             EmailPotrditev::where("id_uporabnik", $user)->delete();
+            $this->createRole($usr);
             return view("stranka.status_registracija", ["uspesno" => "Uspešna potrditev."]);
         } else {
             return view("stranka.status_registracija", ["error" => "Napaka pri potrjevanju!"]);
@@ -150,6 +156,16 @@ class LoginController extends Controller
             "naslov" => htmlspecialchars($data["naslov"]),
             'geslo' => password_hash(htmlspecialchars($data['geslo']), PASSWORD_BCRYPT),
         ]);
+    }
+
+    protected function createRole(Uporabnik $user)
+    {
+        $roleId = Vloga::where("naziv", "stranka")->first();
+        $role = new UporabnikVloga;
+        $role->id_vloga = $roleId->id_vloga;
+        $role->id_uporabnik = $user->id_uporabnik;
+
+        $role->save();
     }
 
 }
