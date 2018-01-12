@@ -5,7 +5,7 @@
  * Date: 28.12.2017
  * Time: 14:45
  */
-Route::middleware("salesLogged")->group(function() {
+Route::middleware(["salesLogged", "loggerS"])->group(function() {
 
     Route::get("/", "InvoiceController@index");
     Route::get("/racuni/{id}", "InvoiceController@showInvoiceForEdit");

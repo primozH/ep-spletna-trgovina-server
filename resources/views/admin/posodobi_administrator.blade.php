@@ -20,5 +20,18 @@
             </form>
         </div>
     </div>
+    <div class="row">
+
+        <div class="col-12">
+            <h3>Dnevnik aktivnosti</h3>
+            <ul>
+                @forelse($logs as $log)
+                    <li><strong>{{ $log->datum_cas }}</strong> <span>{{ $log->tip }}</span> <span>{{ $log->opis }}</span></li>
+                @empty
+                    <h4>Ni aktivnosti!</h4>
+                @endforelse
+            </ul>
+        </div>
+    </div>
 
 @endsection

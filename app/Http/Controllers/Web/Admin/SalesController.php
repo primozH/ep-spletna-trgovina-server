@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Web\Admin;
 
 
+use App\Dnevnik;
 use App\Http\Controllers\Controller;
 use App\Uporabnik;
 use App\UporabnikVloga;
@@ -39,8 +40,10 @@ class SalesController extends Controller
             ["id_uporabnik", $salesman->id_uporabnik]
         ])->get()->first();
 
+        $logs = Dnevnik::where("id_uporabnik", $id)->get();
+
         if ($role)
-            return view("admin.prodajalec", ["prodajalec" => $salesman]);
+            return view("admin.prodajalec", ["prodajalec" => $salesman, "logs" => $logs]);
         else
             return abort(404);
     }

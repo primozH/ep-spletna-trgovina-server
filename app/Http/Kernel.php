@@ -71,6 +71,8 @@ class Kernel extends HttpKernel
         "logged" => \App\Http\Middleware\CheckAuthentication::class,
         "salesLogged" => \App\Http\Middleware\Prodajalec\CheckAuthentication::class,
         "adminLogged" => \App\Http\Middleware\Admin\CheckAuthentication::class,
+        "logger" => \App\Http\Middleware\Admin\Logger::class,
+        "loggerS" => \App\Http\Middleware\Prodajalec\Logger::class,
 
     ];
 }

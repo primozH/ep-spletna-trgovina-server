@@ -6,7 +6,7 @@
  * Time: 14:46
  */
 
-Route::middleware("adminLogged")->group(function() {
+Route::middleware(["adminLogged", "logger"])->group(function() {
     Route::get("/", "SalesController@listSalesmen");
     Route::get("/prodajalci/{id}", "SalesController@getSalesman");
     Route::get("/prodajalci", "SalesController@addSalesman");

@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Web\Admin;
 
 
+use App\Dnevnik;
 use App\Http\Controllers\Controller;
 use App\Uporabnik;
 use Illuminate\Http\Request;
@@ -17,8 +18,9 @@ class ProfileController extends Controller
 {
     public function details(Request $request) {
         $sales = Uporabnik::find($request->session()->get("adminId"));
+        $logs = Dnevnik::where("id_uporabnik", $request->session()->get("adminId"))->limit(50)->orderBy("datum_cas", "desc")->get();
 
-        return view("admin.posodobi_administrator", ["admin" => $sales]);
+        return view("admin.posodobi_administrator", ["admin" => $sales, "logs" => $logs]);
     }
 
     public function updateProfile(Request $request) {

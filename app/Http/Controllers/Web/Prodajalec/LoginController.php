@@ -27,7 +27,7 @@ class LoginController extends Controller
         ]);
 
         $email = $_SERVER["REDIRECT_SSL_CLIENT_S_DN_Email"];
-        $uporabnik = Uporabnik::where("email", $email)->first();
+        $uporabnik = Uporabnik::where("email", $email)->where("aktiviran", true)->first();
 
         $vloga = Vloga::where("naziv", "prodajalec")->first();
 

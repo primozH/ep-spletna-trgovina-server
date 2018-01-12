@@ -14,12 +14,11 @@ class CreateDnevnikTable extends Migration
     public function up()
     {
         Schema::create('dnevnik', function (Blueprint $table) {
+            $table->increments("id");
             $table->timestamp("datum_cas")->default(\DB::raw("CURRENT_TIMESTAMP"));
-            $table->string("opis", 255)->nullable(false);
-            $table->string("tip", 45)->nullable(false);
+            $table->longText("opis")->nullable(false);
+            $table->string("tip", 45)->nullable(true);
             $table->integer("id_uporabnik", false, true)->nullable(false);
-
-            $table->primary(["id_uporabnik", "datum_cas"]);
 
             $table->foreign("id_uporabnik")
                     ->references("id_uporabnik")
