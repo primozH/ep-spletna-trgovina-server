@@ -41,7 +41,7 @@ class UporabnikTableSeeder extends Seeder
             [
                 "ime" => "Janez",
                 "priimek" => "The Man",
-                "email" => "janez@admin.si",
+                "email" => "janez@theman.si",
                 "geslo" => "1234",
                 "potrjen" => true,
             ],

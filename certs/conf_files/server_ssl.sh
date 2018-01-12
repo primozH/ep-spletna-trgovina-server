@@ -17,13 +17,16 @@ cd /var/www/html
 sudo git clone https://github.com/primozH/ep-spletna-trgovina-server spletna-trgovina
 cd spletna-trgovina
 
-cp certs/conf_files/.env .
 
 # DOVOLJENJA
 sudo chown -R www-data /var/www/html/spletna-trgovina
 sudo chmod -R 777 /var/www/html/spletna-trgovina
 
+
+# NAMESTITEV
 composer install
+cp certs/conf_files/settings.env .env
+
 
 # APACHE CONF
 # SSL certifikati
@@ -38,6 +41,7 @@ sudo cp /var/www/html/spletna-trgovina/certs/conf_files/*.conf .
 
 sudo a2enmod ssl
 sudo a2enmod rewrite
+sudo a2dissite 000-defautl.conf
 sudo a2ensite spletna-trgovina.conf
 sudo a2ensite spletna-trgovina-ssl.conf
 
