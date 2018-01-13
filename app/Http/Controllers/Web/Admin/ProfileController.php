@@ -29,7 +29,7 @@ class ProfileController extends Controller
         $sales->ime = htmlspecialchars($request->get("ime"));
         $sales->priimek = htmlspecialchars($request->get("priimek"));
         if ($request->has("geslo") and $request->has("geslo_rep")) {
-            if ($request->get("geslo") == $request->get("geslo_rep")) {
+            if ($request->get("geslo") == $request->get("geslo_rep") and $request->get("geslo") != "") {
                 $sales->geslo = password_hash(htmlspecialchars($request->get("geslo")), PASSWORD_BCRYPT);
             } else {
                 return response()->redirectTo("/admin/profil");

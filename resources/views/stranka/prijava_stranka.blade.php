@@ -16,7 +16,7 @@
             <label for="email" class="col-12 col-md-6 offset-md-3 control-label">Email</label>
             <div class="col-12 col-md-6 offset-md-3">
 
-                <input id="uporabnisko_ime" type="text" name="email" value="{{ old('email') }}" class="form-control" required autofocus>
+                <input id="uporabnisko_ime" type="email" name="email" value="{{ old('email') }}" class="form-control" required autofocus>
 
             </div>
         </div>

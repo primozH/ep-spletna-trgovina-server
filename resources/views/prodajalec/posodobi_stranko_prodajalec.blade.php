@@ -15,8 +15,13 @@
             <input type="text" name="naslov" value="{{ $stranka->naslov }}" required><br>
             Telefonska številka:<br>
             <input type="text" name="tel_stevilka" value="{{ $stranka->tel_stevilka }}" required><br>
+            Aktiviran:<br>
+            <select name="aktiviran">
+                <option value="0" @if (!$stranka->aktiviran) selected @endif>Neaktiven</option>
+                <option value="1" @if ($stranka->aktiviran) selected @endif>Aktiviran</option>
+            </select><br>
             Novo geslo:<br>
-            <input type="password" name="geslo" value=""><br>
+            <input type="password" name="geslo"><br>
             Ponovno vpiši geslo:<br>
             <input type="password" name="geslo_ponovi"><br><br>
 

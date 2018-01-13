@@ -48,6 +48,7 @@ class LoginController extends Controller
 
         $uporabnik = Uporabnik::where("email", htmlspecialchars($data["email"]))
                     ->where("potrjen", true)
+                    ->where("aktiviran", true)
                     ->first();
         if (!$uporabnik)
         {
