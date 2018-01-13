@@ -41,7 +41,7 @@ sudo cp /var/www/html/spletna-trgovina/certs/conf_files/*.conf .
 
 sudo a2enmod ssl
 sudo a2enmod rewrite
-sudo a2dissite 000-defautl.conf
+sudo a2dissite 000-default.conf
 sudo a2ensite spletna-trgovina.conf
 sudo a2ensite spletna-trgovina-ssl.conf
 
