@@ -24,10 +24,16 @@ Route::post("/invoices", "InvoiceController@createInvoice");
 Route::put("/invoices/{id_invoice}", "InvoiceController@updateInvoice");
 Route::delete("/invoices/{id_invoice}", "InvoiceController@deleteInvoice");
 
-Route::post("/login", "LoginController@login");
+Route::post("/login", "LoginController@verifyLogin");
 Route::post("/register", "LoginController@register");
 Route::get("/register/verify", "LoginController@verifyRegister");
 
 
 Route::get("/cart", "CartController@getCart");
 Route::post("/cart", "CartController@addToCart");
+
+Route::middleware("prijavljen")->group(function () {
+   Route::get("/123",function() {
+      return response("Hello");
+   });
+});

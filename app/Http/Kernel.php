@@ -37,6 +37,9 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+
         ],
         'sales' => [
             \App\Http\Middleware\EncryptCookies::class,
@@ -73,6 +76,6 @@ class Kernel extends HttpKernel
         "adminLogged" => \App\Http\Middleware\Admin\CheckAuthentication::class,
         "logger" => \App\Http\Middleware\Admin\Logger::class,
         "loggerS" => \App\Http\Middleware\Prodajalec\Logger::class,
-
+        "prijavljen" => \App\Http\Middleware\Api\CheckAuthentication::class,
     ];
 }

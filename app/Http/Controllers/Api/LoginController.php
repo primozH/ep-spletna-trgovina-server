@@ -11,20 +11,83 @@ namespace App\Http\Controllers\Api;
 use App\EmailPotrditev;
 use App\Uporabnik;
 use App\Http\Controllers\Controller;
+use App\UporabnikVloga;
+use App\Vloga;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    public function verifyLogin(Request $request)
+    {
+        $data = $request->validate([
+            "email" => "required",
+            "geslo" => "required",
+        ]);
+
+        $uporabnik = Uporabnik::where("email", htmlspecialchars($data["email"]))
+            ->where("potrjen", true)
+            ->first();
+        if (!$uporabnik)
+        {
+            return response("Nepravilno uporabnisko_ime/geslo", 401);
+        }
+
+        $vloga = Vloga::where("naziv", "stranka")->first();
+        $vloga_uporabnik = UporabnikVloga::where("id_uporabnik", $uporabnik->id_uporabnik)
+            ->where("id_vloga", $vloga->id_vloga)
+            ->first();
+        if (!$vloga_uporabnik)
+        {
+            return response("Nepravilno uporabnisko_ime/geslo", 401);
+        }
+
+        if ($uporabnik) {
+            if (password_verify(htmlspecialchars($data["geslo"]), $uporabnik->geslo)) {
+                $request->session()->put("userId", $uporabnik->id_uporabnik);
+                return response()->json([
+                    'uporabnik' => $uporabnik
+                ]);
+            }
+            return response("Nepravilno uporabnisko_ime/geslo", 401);
+        }
+        return response("Nepravilno uporabnisko_ime/geslo", 401);
+    }
+
     public function login(Request $request)
     {
-        $uporabnisko_ime = $request->input("uporabnisko_ime");
+        $uporabnik = Uporabnik::where('email', $request->input('email'))->first();
+
+        if (count($uporabnik)) {
+            if (password_verify($request->input('geslo'), $uporabnik->geslo)) {
+                unset($uporabnik->geslo);
+                return response()->json([
+                    'error' => false,
+                    'uporabnik' => $uporabnik
+                ]);
+            }
+            else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Invalid password'
+                ]);
+            }
+        }
+        else {
+            return response()->json([
+                'error' => true,
+                'message' => 'User not exist'
+            ]);
+        }
+
+        /*$uporabnisko_ime = $request->input("uporabnisko_ime");
         $geslo = $request->input("geslo");
 
         $uporabnik = Uporabnik::where("uporabnisko_ime", $uporabnisko_ime)->first();
 
         if ($uporabnik) {
             if (password_verify($geslo, $uporabnik->geslo)) {
-                /* generate token */
+                /* generate token
                 $token = 1;
                 return response()->json([
                     "success" => true,
@@ -38,7 +101,7 @@ class LoginController extends Controller
         return response()->json([
             "success" => false,
             "error" => "Wrong username/password"
-        ]);
+        ]);*/
     }
 
     public function register(Request $request)

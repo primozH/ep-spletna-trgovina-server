@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware\Prodajalec;
+namespace App\Http\Middleware\Api;
 
 use Closure;
 
@@ -15,9 +15,11 @@ class CheckAuthentication
      */
     public function handle($request, Closure $next)
     {
-        if ($request->session()->has("salesId")) {
+        if ($request->session()->has("userId")) {
             return $next($request);
         }
-        return response()->redirectTo("/prodaja/prijava");
+        return response()->json([
+            "sporocilo" => "Nisi prijavljen",
+        ], 401);
     }
 }
