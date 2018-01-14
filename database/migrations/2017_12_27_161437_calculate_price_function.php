@@ -18,7 +18,7 @@ class CalculatePriceFunction extends Migration
         RETURNS DECIMAL(8,2)
         BEGIN
             RETURN (
-                SELECT SUM(p.cena)
+                SELECT SUM(p.cena * p.kolicina)
                 FROM postavka p
                 WHERE p.id_racun = invoice_id);
         END");
