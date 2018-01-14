@@ -73,6 +73,7 @@ class CustomerController extends Controller
             "email" => "required",
             "tel_stevilka" => "required",
             "naslov" => "required",
+            "aktiviran" => "required",
             "geslo" => "nullable"
         ]);
 
@@ -81,8 +82,9 @@ class CustomerController extends Controller
         $user->email = $data["email"];
         $user->tel_stevilka = $data["tel_stevilka"];
         $user->naslov = $data["naslov"];
+        $user->aktiviran = $data["aktiviran"];
 
-        if ($request->has("geslo"))
+        if ($request->has("geslo") and $data["geslo"] != "")
             $user->geslo = password_hash($data["geslo"], PASSWORD_BCRYPT);
 
         try {

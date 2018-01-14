@@ -86,7 +86,7 @@ class SalesController extends Controller
         $salesman->email = htmlspecialchars($data["email"]);
         $salesman->aktiviran = htmlspecialchars($data["aktiviran"]);
 
-        if ($data["geslo"] != null) {
+        if ($data["geslo"] != "") {
             $salesman->geslo = password_hash(htmlspecialchars($data["geslo"]), PASSWORD_BCRYPT);
         }
 

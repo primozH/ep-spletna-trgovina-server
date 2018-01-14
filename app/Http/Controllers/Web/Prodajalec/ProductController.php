@@ -65,7 +65,7 @@ class ProductController extends Controller
     public function updateProduct(Request $request, $id) {
         $product = Produkt::find($id);
 
-        if ($request->has("cena") and $request->has("veljavno_do")) {
+        if ($request->has("cena") and $request->has("veljavno_do") and $request->get("cena") != "") {
             $price = $product->currentPrice();
             $price->veljavno_do = date("Y-m-d");
 

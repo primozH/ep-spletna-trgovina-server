@@ -27,9 +27,15 @@
                 @foreach($stranke as $stranka)
                     <div class="row">
                         <div class="col-2">
-                            <a class="btn btn-outline-warning" href="/prodaja/stranke/{{ $stranka->id_uporabnik }}">
+                            @if ($stranka->aktiviran)
+                            <a class="btn btn-outline-success" href="/prodaja/stranke/{{ $stranka->id_uporabnik }}">
                                 <span>{{ $stranka->id_uporabnik }}</span>
                             </a>
+                            @else
+                                <a class="btn btn-outline-danger" href="/prodaja/stranke/{{ $stranka->id_uporabnik }}">
+                                    <span>{{ $stranka->id_uporabnik }}</span>
+                                </a>
+                            @endif
                         </div>
                         <div class="col-2">
                             <span>{{ $stranka->priimek }}</span>

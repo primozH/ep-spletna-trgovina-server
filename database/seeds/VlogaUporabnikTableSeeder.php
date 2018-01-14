@@ -27,7 +27,7 @@ class VlogaUporabnikTableSeeder extends Seeder
             ],
 
             [
-                "id_vloga" => 3,
+                "id_vloga" => 2,
                 "id_uporabnik" => 4
             ],
             [
@@ -49,6 +49,10 @@ class VlogaUporabnikTableSeeder extends Seeder
             [
                 "id_vloga" => 3,
                 "id_uporabnik" => 9
+            ],
+            [
+                "id_vloga" => 3,
+                "id_uporabnik" => 10
             ],
         ];
 

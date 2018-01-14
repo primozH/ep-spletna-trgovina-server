@@ -36,7 +36,7 @@ class UserController extends Controller
         $user->naslov = htmlspecialchars($data["naslov"]);
         $user->tel_stevilka = htmlspecialchars($data["tel_stevilka"]);
 
-        if ($data["geslo"] != null and $data["geslo_staro"] != null and $data["geslo"] == $data["geslo_rep"]) {
+        if ($data["geslo"] != "" and $data["geslo_staro"] != "" and $data["geslo"] == $data["geslo_rep"]) {
             if (password_verify(htmlspecialchars($data["geslo_staro"]), $user->geslo)) {
                 $user->geslo = password_hash(htmlspecialchars($data["geslo"]), PASSWORD_BCRYPT);
             } else {
