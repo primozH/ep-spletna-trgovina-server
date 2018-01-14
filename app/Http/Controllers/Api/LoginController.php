@@ -15,6 +15,7 @@ use App\UporabnikVloga;
 use App\Vloga;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Constraint\IsTrue;
 
 class LoginController extends Controller
 {
@@ -30,7 +31,10 @@ class LoginController extends Controller
             ->first();
         if (!$uporabnik)
         {
-            return response("Nepravilno uporabnisko_ime/geslo", 401);
+            return response()->json([
+                'error' => true,
+                'uporabnik' => null
+            ]);
         }
 
         $vloga = Vloga::where("naziv", "stranka")->first();
@@ -39,19 +43,76 @@ class LoginController extends Controller
             ->first();
         if (!$vloga_uporabnik)
         {
-            return response("Nepravilno uporabnisko_ime/geslo", 401);
+            return response()->json([
+                'error' => true,
+                'uporabnik' => null
+            ]);
         }
 
         if ($uporabnik) {
             if (password_verify(htmlspecialchars($data["geslo"]), $uporabnik->geslo)) {
                 $request->session()->put("userId", $uporabnik->id_uporabnik);
                 return response()->json([
+                    'error' => false,
                     'uporabnik' => $uporabnik
                 ]);
             }
-            return response("Nepravilno uporabnisko_ime/geslo", 401);
+            return response()->json([
+                'error' => true,
+                'uporabnik' => null
+            ]);
         }
-        return response("Nepravilno uporabnisko_ime/geslo", 401);
+        return response()->json([
+            'error' => true,
+            'uporabnik' => null
+        ]);
+    }
+
+    public function updateUser(Request $request) {
+
+        $data = $request->validate([
+            "ime" => "required",
+            "priimek" => "required",
+            "email" => "required|email",
+            "naslov" => "required",
+            "tel_stevilka" => "nullable",
+            /*"geslo_staro" => "nullable",
+            "geslo" => "nullable",
+            "geslo_rep" => "nullable",*/
+        ]);
+
+        $userId = $request->session()->get("userId");
+
+        $user = Uporabnik::find($userId);
+        $user->ime = htmlspecialchars($data["ime"]);
+        $user->priimek = htmlspecialchars($data["priimek"]);
+        $user->email = htmlspecialchars($data["email"]);
+        $user->naslov = htmlspecialchars($data["naslov"]);
+        $user->tel_stevilka = htmlspecialchars($data["tel_stevilka"]);
+
+
+        /*if ($data["geslo"] != "" and $data["geslo_staro"] != "" and $data["geslo"] == $data["geslo_rep"]) {
+            if (password_verify(htmlspecialchars($data["geslo_staro"]), $user->geslo)) {
+                $user->geslo = password_hash(htmlspecialchars($data["geslo"]), PASSWORD_BCRYPT);
+            } else {
+                return response() -> json([
+                    'success' => false
+                ]);
+            }
+        }*/
+
+        $user->save();
+        return response()->json([
+            'error' => false,
+            'uporabnik' => $user
+        ]);
+    }
+
+    public function getUser(Request $request) {
+        $userId = $request->session()->get("userId");
+
+        $user = Uporabnik::find($userId);
+        return view("stranka.posodobi_stranka", ["stranka" => $user]);
     }
 
     public function login(Request $request)

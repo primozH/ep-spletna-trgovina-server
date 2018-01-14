@@ -36,4 +36,5 @@ Route::middleware("prijavljen")->group(function () {
    Route::get("/123",function() {
       return response("Hello");
    });
+    Route::put("/update", "LoginController@updateUser");
 });

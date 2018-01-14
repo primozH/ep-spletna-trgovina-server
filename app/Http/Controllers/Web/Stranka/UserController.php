@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function getUser(Request $request) {
-        $userId = $request->session()->get("userId");
-
-        $user = Uporabnik::find($userId);
-        return view("stranka.posodobi_stranka", ["stranka" => $user]);
-    }
 
     public function updateUser(Request $request) {
         $data = $request->validate([
