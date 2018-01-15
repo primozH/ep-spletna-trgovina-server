@@ -76,9 +76,9 @@ class LoginController extends Controller
             "email" => "required|email",
             "naslov" => "required",
             "tel_stevilka" => "nullable",
-            /*"geslo_staro" => "nullable",
+            "geslo_staro" => "nullable",
             "geslo" => "nullable",
-            "geslo_rep" => "nullable",*/
+            "geslo_rep" => "nullable",
         ]);
 
         $userId = $request->session()->get("userId");
@@ -91,15 +91,16 @@ class LoginController extends Controller
         $user->tel_stevilka = htmlspecialchars($data["tel_stevilka"]);
 
 
-        /*if ($data["geslo"] != "" and $data["geslo_staro"] != "" and $data["geslo"] == $data["geslo_rep"]) {
+        if ($data["geslo"] != "" and $data["geslo_staro"] != "" and $data["geslo"] == $data["geslo_rep"]) {
             if (password_verify(htmlspecialchars($data["geslo_staro"]), $user->geslo)) {
                 $user->geslo = password_hash(htmlspecialchars($data["geslo"]), PASSWORD_BCRYPT);
             } else {
                 return response() -> json([
-                    'success' => false
+                    'error' => false,
+                    "uporabnik" => null
                 ]);
             }
-        }*/
+        }
 
         $user->save();
         return response()->json([
